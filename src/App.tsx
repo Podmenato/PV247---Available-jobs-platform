@@ -1,10 +1,14 @@
 import React from 'react';
+import {ThemeProvider} from '@mui/material'
+import {theme} from 'theme'
 
 function App() {
   return (
-    <div className="App">
+      <ThemeProvider theme={theme}>
+        <div className="App">
 
-    </div>
+        </div>
+      </ThemeProvider>
   );
 }
 
