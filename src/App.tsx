@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { theme } from 'theme';
 import { EPaths } from 'enums/EPaths';
 import Home from 'pages/Home';
+import Offer from 'components/Offer';
 import Layout from 'components/Layout';
 import { LanguageProvider } from 'hooks/useTranslation';
 import Login from 'pages/Login';
@@ -22,6 +23,7 @@ const App = () => (
 							<Route path={EPaths.HOME} element={<Home />} />
 							<Route path={EPaths.LOGIN} element={<Login />} />
 							<Route path={EPaths.SETTINGS} element={<Settings />} />
+							<Route path={EPaths.OFFER} element={<Offer />} />
 						</Routes>
 					</Layout>
 				</BrowserRouter>
