@@ -1,3 +1,4 @@
 export enum EPaths {
-	HOME = '/'
+	HOME = '/',
+	SETTINGS = '/settings'
 }
