@@ -1,4 +1,5 @@
 export enum EPaths {
 	HOME = '/',
-	OFFER = '/offer/:id'
+	OFFER = '/offer/:id',
+	LOGIN = '/login'
 }
