@@ -13,7 +13,11 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-const Settings = () => {
+export type SettingsProps = {
+	sendDataToParent: (password: string | undefined) => void;
+};
+
+const Settings: React.FC<SettingsProps> = ({ sendDataToParent }) => {
 	const [state, setState] = React.useState({
 		firstName: '',
 		lastName: '',
@@ -45,6 +49,7 @@ const Settings = () => {
 	const mailValid = mailTouched && !pattern.test(mail as string);
 
 	const [showPassword, setShowPassword] = useState(false);
+	const [showPassword_2, setShowPassword_2] = useState(false);
 	const passwordsDiffer =
 		passwordTouched && passwordRepatedTouched && password !== passwordRepeated;
 	const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,8 +68,21 @@ const Settings = () => {
 	const handleMouseDownPassword = (event: { preventDefault: () => void }) => {
 		event.preventDefault();
 	};
+	const handleClickShowPassword_2 = () => {
+		setShowPassword_2(!showPassword_2);
+	};
+	const handleMouseDownPassword_2 = (event: { preventDefault: () => void }) => {
+		event.preventDefault();
+	};
 	const test = () => {
-		console.log(state.firstName, state.lastName, state.education, mail);
+		console.log(
+			state.firstName,
+			state.lastName,
+			state.education,
+			mail,
+			password
+		);
+		sendDataToParent(password);
 	};
 	return (
 		<Container>
@@ -144,7 +162,7 @@ const Settings = () => {
 					</InputLabel>
 					<OutlinedInput
 						id="outlined-adornment-password"
-						type={showPassword ? 'text' : 'password'}
+						type={showPassword_2 ? 'text' : 'password'}
 						value={passwordRepeated}
 						error={passwordsDiffer}
 						onChange={handleChangePasswordRepeated}
@@ -152,11 +170,11 @@ const Settings = () => {
 							<InputAdornment position="end">
 								<IconButton
 									aria-label="toggle password visibility"
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
+									onClick={handleClickShowPassword_2}
+									onMouseDown={handleMouseDownPassword_2}
 									edge="end"
 								>
-									{showPassword ? <VisibilityOff /> : <Visibility />}
+									{showPassword_2 ? <VisibilityOff /> : <Visibility />}
 								</IconButton>
 							</InputAdornment>
 						}

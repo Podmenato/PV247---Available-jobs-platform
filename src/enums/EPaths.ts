@@ -1,4 +1,5 @@
 export enum EPaths {
 	HOME = '/',
-	SETTINGS = '/settings'
+	SETTINGS = '/settings',
+	CHANGE_SETTINGS = '/change'
 }
