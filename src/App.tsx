@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { theme } from 'theme';
 import { EPaths } from 'enums/EPaths';
 import Home from 'pages/Home';
-import Offer from 'components/Offer';
+import Offer from 'pages/Offer';
 import Layout from 'components/Layout';
 import { LanguageProvider } from 'hooks/useTranslation';
 import Login from 'pages/Login';
