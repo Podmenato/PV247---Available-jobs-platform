@@ -16,6 +16,7 @@ import OfferDetails from 'components/OfferDetails';
 import OfferContact from 'components/OfferContact';
 import { apiOfferById } from 'api/apiJobOffers';
 import { IJobOffer } from 'interfaces/IJobOffer';
+import LoadingBackdrop from 'components/LoadingBackdrop';
 
 const Offer = () => {
 	const { id } = useParams();
@@ -79,9 +80,6 @@ const Offer = () => {
 
 	return (
 		<>
-			<Backdrop sx={{ color: '#fff', zIndex: 999 }} open={!loaded}>
-				<CircularProgress color="inherit" />
-			</Backdrop>
 			{jobParams ? (
 				<Grid container spacing={2}>
 					<OfferDetails
@@ -105,6 +103,7 @@ const Offer = () => {
 					</Grid>
 				)
 			)}
+			<LoadingBackdrop loading={!loaded} />
 		</>
 	);
 };
