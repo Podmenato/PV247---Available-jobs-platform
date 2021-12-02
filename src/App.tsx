@@ -20,6 +20,7 @@ const App = () => (
 						<Routes>
 							<Route path={EPaths.HOME} element={<Home />} />
 							<Route path={EPaths.LOGIN} element={<Login />} />
+              <Route path={EPaths.SETTINGS} element={<Settings />} />
 						</Routes>
 					</Layout>
 				</BrowserRouter>
