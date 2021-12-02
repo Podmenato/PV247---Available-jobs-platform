@@ -7,8 +7,7 @@ import {
 	CardMedia,
 	Typography,
 	ListItemButton,
-	ListItemIcon,
-	Button
+	ListItemIcon
 } from '@mui/material';
 import { Email, Phone } from '@mui/icons-material';
 
