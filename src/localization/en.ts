@@ -15,6 +15,15 @@ export default {
 	azylanty: 'Asylum seekers',
 	bezbar: 'People in wheelchair',
 	cizince: 'Foreigners',
+	employment_type: 'Employment type',
 	ozp: 'People with disabilities',
+	ppvztahDpc: 'Contract for work',
+	ppvztahDpp: 'Contract of services',
+	ppvztahPpPlny: 'Full time',
+	ppvztahPpZkrac: 'Part time',
+	ppvztahSp: 'SP',
+	shifts: 'Shifts',
+	minimum_salary: 'Minimum salary',
+	contact_person: 'Contact person',
 	settings: 'Settings'
 };
