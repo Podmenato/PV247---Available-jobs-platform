@@ -102,7 +102,7 @@ const OfferDetails: React.FC<Props> = ({
 								primary={Object.entries(jobParams?.PRACPRAVNI_VZTAH)
 									.filter(([_, val]) => val === 'A')
 									.map(([key, _]) => key)}
-								secondary="Employment type"
+								secondary={t('employment_type')}
 							/>
 						</ListItem>
 						<ListItem disablePadding>
@@ -111,7 +111,7 @@ const OfferDetails: React.FC<Props> = ({
 							</ListItemIcon>
 							<ListItemText
 								primary={jobParams?.SMENNOST?.nazev}
-								secondary="Shifts"
+								secondary={t('shifts')}
 							/>
 						</ListItem>
 						<ListItem disablePadding>
@@ -120,7 +120,7 @@ const OfferDetails: React.FC<Props> = ({
 							</ListItemIcon>
 							<ListItemText
 								primary={`${jobParams?.MZDA?.min} Kč / ${jobParams?.MZDA?.typMzdy}`}
-								secondary="Minimum salary"
+								secondary={t('minimum_salary')}
 							/>
 						</ListItem>
 					</List>
