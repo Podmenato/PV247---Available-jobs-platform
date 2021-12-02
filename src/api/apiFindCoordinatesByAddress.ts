@@ -33,7 +33,7 @@ export const apiFindCoordinatesByAddress = async (query: string) => {
 			url: `${NOMINATIM_SEARCH_URL}?${params}`,
 			method: 'GET',
 			headers,
-			responseType: 'json'
+			responseType: `${FORMAT_JSON}`
 		});
 		return response.data;
 	} catch (e: unknown) {

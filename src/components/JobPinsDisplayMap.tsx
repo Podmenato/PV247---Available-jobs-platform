@@ -11,7 +11,7 @@ type IProps = {
 
 const JobPinsDisplayMap = (props: IProps) => {
 	const { markerPosition } = props;
-	const defaultTypes = { height: 500, width: 500, padding: 1 };
+	const defaultStyles = { height: 500, width: 500, padding: 1 };
 
 	return (
 		<Box component="div" sx={props.sx ?? defaultTypes}>
