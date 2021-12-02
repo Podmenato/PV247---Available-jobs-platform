@@ -51,52 +51,33 @@ const OfferContact: React.FC<Props> = ({ jobParams }) => {
 					<ListItem disablePadding>
 						<ListItemText primary={jobParams?.KONOS?._} />
 					</ListItem>
-					<ListItem disablePadding>
-						<ListItemButton
-							component="a"
-							href={`mailto:${jobParams?.KONOS?.email}`}
-						>
-							<ListItemIcon>
-								<Email />
-							</ListItemIcon>
-							<ListItemText primary={jobParams?.KONOS?.email} />
-						</ListItemButton>
-					</ListItem>
-					<ListItem disablePadding>
-						<ListItemButton
-							component="a"
-							href={`tel:${jobParams?.KONOS?.telefon}`}
-						>
-							<ListItemIcon>
-								<Phone />
-							</ListItemIcon>
-							<ListItemText primary={jobParams?.KONOS?.telefon} />
-						</ListItemButton>
-					</ListItem>
+					{jobParams?.KONOS?.email && (
+						<ListItem disablePadding>
+							<ListItemButton
+								component="a"
+								href={`mailto:${jobParams?.KONOS?.email}`}
+							>
+								<ListItemIcon>
+									<Email />
+								</ListItemIcon>
+								<ListItemText primary={jobParams?.KONOS?.email} />
+							</ListItemButton>
+						</ListItem>
+					)}
+					{jobParams?.KONOS?.telefon && (
+						<ListItem disablePadding>
+							<ListItemButton
+								component="a"
+								href={`tel:${jobParams?.KONOS?.telefon}`}
+							>
+								<ListItemIcon>
+									<Phone />
+								</ListItemIcon>
+								<ListItemText primary={jobParams?.KONOS?.telefon} />
+							</ListItemButton>
+						</ListItem>
+					)}
 				</List>
-				{jobParams?.KONOS?.email && (
-					<Button
-						variant="contained"
-						href={`mailto:${jobParams?.KONOS?.email}`}
-						sx={{
-							width: '100%',
-							margin: '1em 0'
-						}}
-					>
-						<Email /> &nbsp;email
-					</Button>
-				)}
-				{jobParams?.KONOS?.telefon && (
-					<Button
-						variant="outlined"
-						href={`tel:${jobParams?.KONOS?.telefon}`}
-						sx={{
-							width: '100%'
-						}}
-					>
-						<Phone /> &nbsp;phone
-					</Button>
-				)}
 			</Card>
 		</Grid>
 	);
