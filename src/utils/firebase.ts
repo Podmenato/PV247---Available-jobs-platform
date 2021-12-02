@@ -7,6 +7,13 @@ import {
 	onAuthStateChanged,
 	User
 } from 'firebase/auth';
+import {
+	collection,
+	CollectionReference,
+	doc,
+	DocumentReference,
+	getFirestore
+} from 'firebase/firestore';
 
 initializeApp({
 	apiKey: 'AIzaSyDK4yzJg5XUbi-RfIM4KiZbZKO1Y61UprA',
@@ -29,3 +36,18 @@ export const signOut = () => authSignOut(auth);
 
 export const onAuthChanged = (callback: (user: User | null) => void) =>
 	onAuthStateChanged(auth, callback);
+
+const db = getFirestore();
+
+export type Favorite = {
+	user: string;
+	offer: number;
+};
+
+export const favoritesCollection = collection(
+	db,
+	'favorites'
+) as CollectionReference<Favorite>;
+
+export const favoritesDocument = (id: string) =>
+	doc(db, 'favorites', id) as DocumentReference<Favorite>;
