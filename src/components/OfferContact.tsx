@@ -4,21 +4,36 @@ import {
 	List,
 	ListItem,
 	ListItemText,
-	CardMedia,
 	Typography,
 	ListItemButton,
 	ListItemIcon
 } from '@mui/material';
 import { Email, Phone } from '@mui/icons-material';
+import { LatLng } from 'leaflet';
+import { FC, useEffect, useState } from 'react';
 
 import { useTranslation } from 'hooks/useTranslation';
+import { IJobOffer } from 'interfaces/IJobOffer';
+import JobPinsDisplayMap from 'components/JobPinsDisplayMap';
+import { apiFindCoordinatesByAddress } from 'api/apiFindCoordinatesByAddress';
 
 type Props = {
-	jobParams: Record<string, any>;
+	jobParams: IJobOffer;
 };
 
-const OfferContact: React.FC<Props> = ({ jobParams }) => {
+const OfferContact: FC<Props> = ({ jobParams }) => {
 	const t = useTranslation();
+	const [coordinates, setCoordinates] = useState<LatLng | undefined>();
+	useEffect(() => {
+		const findCoordinates = async () => {
+			const response = await apiFindCoordinatesByAddress(
+				`${jobParams.PRACOVISTE.ulice} ${jobParams.PRACOVISTE.cp} ${jobParams.PRACOVISTE.obec}`
+			);
+			const place = response[0];
+			setCoordinates(new LatLng(place.lat, place.lon));
+		};
+		findCoordinates();
+	}, [jobParams]);
 
 	return (
 		<Grid item xs={12} md={4}>
@@ -38,13 +53,10 @@ const OfferContact: React.FC<Props> = ({ jobParams }) => {
 						)
 					)}
 				</List>
-				<CardMedia>
-					<img
-						src="https://assets-global.website-files.com/6050a76fa6a633d5d54ae714/609147088669907f652110b0_report-an-issue(about-maps).jpeg"
-						alt=""
-						width="100%"
-					/>
-				</CardMedia>
+				<JobPinsDisplayMap
+					sx={{ height: 200, width: '100%', padding: 1 }}
+					markerPosition={coordinates}
+				/>
 				<Typography variant="h5">{t('contact_person')}</Typography>
 				<List>
 					<ListItem disablePadding>
