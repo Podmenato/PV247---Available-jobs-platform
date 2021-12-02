@@ -19,6 +19,11 @@ const Layout: React.FC = ({ children }) => {
 						<Button variant="contained" component={Link} to={EPaths.HOME}>
 							{t('home')}
 						</Button>
+						{user && (
+							<Button variant="contained" component={Link} to={EPaths.SETTINGS}>
+								{t('settings')}
+							</Button>
+						)}
 						{!user && (
 							<Button variant="contained" component={Link} to={EPaths.LOGIN}>
 								{t('login')}

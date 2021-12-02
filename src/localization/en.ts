@@ -7,5 +7,6 @@ export default {
 	email: 'Email',
 	password: 'Password',
 	sign_up: 'Sign up',
-	sign_in: 'Sign in'
+	sign_in: 'Sign in',
+	settings: 'Settings'
 };

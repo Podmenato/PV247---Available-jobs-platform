@@ -9,6 +9,7 @@ import Layout from 'components/Layout';
 import { LanguageProvider } from 'hooks/useTranslation';
 import Login from 'pages/Login';
 import { UserProvider } from 'hooks/useUser';
+import Settings from 'components/Settings';
 
 const App = () => (
 	<ThemeProvider theme={theme}>
@@ -20,7 +21,7 @@ const App = () => (
 						<Routes>
 							<Route path={EPaths.HOME} element={<Home />} />
 							<Route path={EPaths.LOGIN} element={<Login />} />
-              <Route path={EPaths.SETTINGS} element={<Settings />} />
+							<Route path={EPaths.SETTINGS} element={<Settings />} />
 						</Routes>
 					</Layout>
 				</BrowserRouter>

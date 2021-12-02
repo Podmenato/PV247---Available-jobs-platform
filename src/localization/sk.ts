@@ -7,5 +7,6 @@ export default {
 	email: 'Email',
 	password: 'Heslo',
 	sign_up: 'Registrovať sa',
-	sign_in: 'Prihlásiť sa'
+	sign_in: 'Prihlásiť sa',
+	settings: 'Nastavenia'
 };
