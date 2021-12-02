@@ -1,5 +1,12 @@
 import React from 'react';
+import { Paper } from '@mui/material';
 
-const Home = () => <div>HOME</div>;
+import SearchInput from 'components/SearchInput';
+
+const Home = () => (
+	<Paper>
+		<SearchInput />
+	</Paper>
+);
 
 export default Home;
