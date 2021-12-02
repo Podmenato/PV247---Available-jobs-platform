@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Paper, Stack, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
-import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
+import { Paper } from '@mui/material';
+import { LatLng } from 'leaflet';
+
+import JobPinsDisplayMap from 'components/JobPinsDisplayMap';
 
 enum ESearchListDisplay {
 	MAP = 'MAP',
@@ -22,21 +23,7 @@ const Home = () => {
 
 	return (
 		<Paper>
-			<Stack direction="row" spacing={4}>
-				<ToggleButtonGroup
-					value={displayMode}
-					exclusive
-					onChange={handleAlignment}
-					aria-label="display mode"
-				>
-					<ToggleButton value={ESearchListDisplay.MAP} aria-label="map">
-						<MapOutlinedIcon />
-					</ToggleButton>
-					<ToggleButton value={ESearchListDisplay.LIST} aria-label="list">
-						<ListOutlinedIcon />
-					</ToggleButton>
-				</ToggleButtonGroup>
-			</Stack>
+			<JobPinsDisplayMap markerPosition={new LatLng(49.804, 15.815)} />
 		</Paper>
 	);
 };
