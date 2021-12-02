@@ -30,11 +30,36 @@ import {
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios, { AxiosResponse } from 'axios';
+import { addDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
+
+import { favoritesCollection, favoritesDocument } from 'utils/firebase';
+import useUser from 'hooks/useUser';
 
 const Offer = () => {
 	const { id } = useParams();
+	const user = useUser();
 	const [jobParams, setJobParams] = useState<Record<string, any>>();
 	const [loaded, setLoaded] = useState<boolean>(false);
+	const [favoriteId, setFavoriteId] = useState<string | undefined>(undefined);
+
+	useEffect(() => {
+		const unsubscribe = onSnapshot(favoritesCollection, snapshot => {
+			setFavoriteId(
+				snapshot.docs
+					.filter(
+						doc =>
+							doc.data().user === user?.email &&
+							id &&
+							doc.data().offer === parseInt(id)
+					)
+					.map(doc => doc.id)
+					.pop()
+			);
+		});
+		return () => {
+			unsubscribe();
+		};
+	}, [user]);
 
 	useEffect(() => {
 		axios
@@ -58,7 +83,25 @@ const Offer = () => {
 			);
 	}, [id]);
 
-	const [isFavorite, setIsFavorite] = useState<boolean>(false);
+	const handleFavorite = async () => {
+		if (!user?.email || !id) {
+			return;
+		}
+
+		try {
+			if (favoriteId) {
+				const document = favoritesDocument(favoriteId);
+				await deleteDoc(document);
+			} else {
+				await addDoc(favoritesCollection, {
+					user: user.email,
+					offer: parseInt(id)
+				});
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<>
@@ -74,8 +117,8 @@ const Offer = () => {
 									<IconButton onClick={() => alert('share')}>
 										<ShareOutlined />
 									</IconButton>
-									<IconButton onClick={() => setIsFavorite(!isFavorite)}>
-										{isFavorite ? (
+									<IconButton onClick={() => handleFavorite()}>
+										{favoriteId ? (
 											<Star sx={{ color: 'star' }} />
 										) : (
 											<StarOutline sx={{ color: 'star' }} />
