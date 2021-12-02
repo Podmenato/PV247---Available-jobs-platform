@@ -1,13 +1,6 @@
-import {
-	Grid,
-	Typography,
-	Card,
-	Backdrop,
-	CircularProgress
-} from '@mui/material';
+import { Grid, Typography, Card } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import axios, { AxiosResponse } from 'axios';
 import { addDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
 
 import { favoritesCollection, favoritesDocument } from 'utils/firebase';
