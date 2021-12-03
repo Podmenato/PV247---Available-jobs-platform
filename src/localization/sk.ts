@@ -25,5 +25,7 @@ export default {
 	shifts: 'Smeny',
 	minimum_salary: 'Minimálna mzda',
 	contact_person: 'Kontaktná osoba',
-	settings: 'Nastavenia'
+	settings: 'Nastavenia',
+	show_more: 'Zobraziť viac',
+	favorite_offers: 'Moje obľúbené ponuky'
 };

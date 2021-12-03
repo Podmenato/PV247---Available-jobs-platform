@@ -25,5 +25,7 @@ export default {
 	shifts: 'Shifts',
 	minimum_salary: 'Minimum salary',
 	contact_person: 'Contact person',
-	settings: 'Settings'
+	settings: 'Settings',
+	show_more: 'Show more',
+	favorite_offers: 'My favorite offers'
 };
