@@ -7,6 +7,7 @@ import { EPaths } from 'enums/EPaths';
 import Home from 'pages/Home';
 import Offer from 'pages/Offer';
 import Favorites from 'pages/Favorites';
+import Trending from 'pages/Trending';
 import Layout from 'components/Layout';
 import { LanguageProvider } from 'hooks/useTranslation';
 import Login from 'pages/Login';
@@ -26,6 +27,7 @@ const App = () => (
 							<Route path={EPaths.SETTINGS} element={<Settings />} />
 							<Route path={EPaths.OFFER} element={<Offer />} />
 							<Route path={EPaths.FAVORITES} element={<Favorites />} />
+							<Route path={EPaths.TRENDING} element={<Trending />} />
 						</Routes>
 					</Layout>
 				</BrowserRouter>
