@@ -1,24 +1,20 @@
-import {
-	Grid,
-	Typography,
-	Card,
-	Backdrop,
-	CircularProgress
-} from '@mui/material';
+import { Grid, Typography, Card } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import axios, { AxiosResponse } from 'axios';
 import { addDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
 
 import { favoritesCollection, favoritesDocument } from 'utils/firebase';
 import useUser from 'hooks/useUser';
 import OfferDetails from 'components/OfferDetails';
 import OfferContact from 'components/OfferContact';
+import { apiOfferById } from 'api/apiJobOffers';
+import { IJobOffer } from 'interfaces/IJobOffer';
+import LoadingBackdrop from 'components/LoadingBackdrop';
 
 const Offer = () => {
 	const { id } = useParams();
 	const user = useUser();
-	const [jobParams, setJobParams] = useState<Record<string, any>>();
+	const [jobParams, setJobParams] = useState<IJobOffer>();
 	const [loaded, setLoaded] = useState<boolean>(false);
 	const [favoriteId, setFavoriteId] = useState<string | undefined>(undefined);
 
@@ -42,25 +38,17 @@ const Offer = () => {
 	}, [user]);
 
 	useEffect(() => {
-		axios
-			.request({
-				url: `https://api.apitalks.store/volna-pracovni-mista/${id}`,
-				method: 'GET',
-				headers: {
-					'x-api-key': '27DMzQacy52IFIj5RXYal3MVqtqmTrXb5W17CoO7'
-				}
-			})
-			.then(
-				(response: AxiosResponse) => {
-					console.log(response.data);
-					setJobParams(response.data);
-					setLoaded(true);
-				},
-				() => {
-					setJobParams(undefined);
-					setLoaded(true);
-				}
-			);
+		if (id === undefined) return;
+		apiOfferById(id).then(
+			(response: IJobOffer) => {
+				setJobParams(response);
+				setLoaded(true);
+			},
+			() => {
+				setJobParams(undefined);
+				setLoaded(true);
+			}
+		);
 	}, [id]);
 
 	const handleFavorite = async () => {
@@ -85,9 +73,6 @@ const Offer = () => {
 
 	return (
 		<>
-			<Backdrop sx={{ color: '#fff', zIndex: 999 }} open={!loaded}>
-				<CircularProgress color="inherit" />
-			</Backdrop>
 			{jobParams ? (
 				<Grid container spacing={2}>
 					<OfferDetails
@@ -111,6 +96,7 @@ const Offer = () => {
 					</Grid>
 				)
 			)}
+			<LoadingBackdrop loading={!loaded} />
 		</>
 	);
 };

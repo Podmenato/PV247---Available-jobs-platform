@@ -23,12 +23,12 @@ import {
 } from '@mui/icons-material';
 
 import { useTranslation } from 'hooks/useTranslation';
+import { IJobOffer } from 'interfaces/IJobOffer';
 
 type Props = {
 	handleFavorite: () => void;
 	favoriteId: string | undefined;
-	jobParams: Record<string, any>;
-	//jobParams: Record<string, Record<string, string> | string>;
+	jobParams: IJobOffer;
 };
 
 const OfferDetails: React.FC<Props> = ({
