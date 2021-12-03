@@ -101,7 +101,15 @@ const OfferDetails: React.FC<Props> = ({
 							<ListItemText
 								primary={Object.entries(jobParams?.PRACPRAVNI_VZTAH)
 									.filter(([_, val]) => val === 'A')
-									.map(([key, _]) => key)}
+									.map(
+										([key, _]) =>
+											(key === 'ppvztahDpc' ||
+												key === 'ppvztahDpp' ||
+												key === 'ppvztahPpPlny' ||
+												key === 'ppvztahPpZkrac' ||
+												key === 'ppvztahSp') &&
+											t(key)
+									)}
 								secondary={t('employment_type')}
 							/>
 						</ListItem>
