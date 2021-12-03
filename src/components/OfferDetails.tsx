@@ -21,13 +21,15 @@ import {
 } from '@mui/icons-material';
 
 import { useTranslation } from 'hooks/useTranslation';
+import { IJobOffer } from 'interfaces/IJobOffer';
 
 import FavoriteButton from './FavoriteButton';
 
 type Props = {
-	jobParams: Record<string, any>;
 	offerId: string;
-	//jobParams: Record<string, Record<string, string> | string>;
+	handleFavorite: () => void;
+	favoriteId: string | undefined;
+	jobParams: IJobOffer;
 };
 
 const OfferDetails: React.FC<Props> = ({ jobParams, offerId }) => {

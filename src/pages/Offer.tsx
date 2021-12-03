@@ -1,38 +1,61 @@
-import {
-	Grid,
-	Typography,
-	Card,
-	Backdrop,
-	CircularProgress
-} from '@mui/material';
+import { Grid, Typography, Card } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+
+import { addDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
 
 import OfferDetails from 'components/OfferDetails';
 import OfferContact from 'components/OfferContact';
 import { apiOfferById } from 'api/apiJobOffers';
-
+import { IJobOffer } from 'interfaces/IJobOffer';
+import LoadingBackdrop from 'components/LoadingBackdrop';
 const Offer = () => {
 	const { id } = useParams();
-	const [jobParams, setJobParams] = useState<Record<string, any>>();
+	const user = useUser();
+	const [jobParams, setJobParams] = useState<IJobOffer>();
 	const [loaded, setLoaded] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (id) {
-			apiOfferById(id).then(data => {
-				setJobParams(data);
+		const unsubscribe = onSnapshot(favoritesCollection, snapshot => {
+			setFavoriteId(
+				snapshot.docs
+					.filter(
+						doc =>
+							doc.data().user === user?.email &&
+							id &&
+							doc.data().offer === parseInt(id)
+					)
+					.map(doc => doc.id)
+					.pop()
+			);
+		});
+		return () => {
+			unsubscribe();
+		};
+	}, [user]);
+
+	useEffect(() => {
+		if (id === undefined) return;
+		apiOfferById(id).then(
+			(response: IJobOffer) => {
+				setJobParams(response);
 				setLoaded(true);
-			});
-		} else {
-			setJobParams(undefined);
+			},
+			() => {
+				setJobParams(undefined);
+				setLoaded(true);
+			}
+		);
+	}, [id]);
+
+	const handleFavorite = async () => {
+		if (!user?.email || !id) {
+			return;
 		}
 	}, [id]);
 
 	return (
 		<>
-			<Backdrop sx={{ color: '#fff', zIndex: 999 }} open={!loaded}>
-				<CircularProgress color="inherit" />
-			</Backdrop>
 			{id && jobParams ? (
 				<Grid container spacing={2}>
 					<OfferDetails jobParams={jobParams} offerId={id} />
@@ -52,6 +75,7 @@ const Offer = () => {
 					</Grid>
 				)
 			)}
+			<LoadingBackdrop loading={!loaded} />
 		</>
 	);
 };

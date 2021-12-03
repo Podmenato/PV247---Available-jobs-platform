@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import { SxProps } from '@mui/system';
 
 type IProps = {
-	markerPosition: LatLng;
+	markerPosition: LatLng | undefined;
 	sx?: SxProps;
 };
 
@@ -15,18 +15,20 @@ const JobPinsDisplayMap = (props: IProps) => {
 
 	return (
 		<Box component="div" sx={props.sx ?? defaultStyles}>
-			<MapContainer
-				center={markerPosition}
-				zoom={13}
-				scrollWheelZoom
-				style={{ height: '100%', width: '100%' }}
-			>
-				<TileLayer
-					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-				/>
-				<Marker position={markerPosition} />
-			</MapContainer>
+			{markerPosition && (
+				<MapContainer
+					center={markerPosition}
+					zoom={13}
+					scrollWheelZoom
+					style={{ height: '100%', width: '100%' }}
+				>
+					<TileLayer
+						attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					/>
+					<Marker position={markerPosition} />
+				</MapContainer>
+			)}
 		</Box>
 	);
 };
