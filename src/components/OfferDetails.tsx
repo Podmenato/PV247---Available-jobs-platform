@@ -12,8 +12,6 @@ import {
 	ListItemText
 } from '@mui/material';
 import {
-	Star,
-	StarOutline,
 	ShareOutlined,
 	AttachMoney,
 	AccessTime,
@@ -24,18 +22,15 @@ import {
 
 import { useTranslation } from 'hooks/useTranslation';
 
+import FavoriteButton from './FavoriteButton';
+
 type Props = {
-	handleFavorite: () => void;
-	favoriteId: string | undefined;
 	jobParams: Record<string, any>;
+	offerId: string;
 	//jobParams: Record<string, Record<string, string> | string>;
 };
 
-const OfferDetails: React.FC<Props> = ({
-	handleFavorite,
-	favoriteId,
-	jobParams
-}) => {
+const OfferDetails: React.FC<Props> = ({ jobParams, offerId }) => {
 	const t = useTranslation();
 
 	return (
@@ -46,13 +41,7 @@ const OfferDetails: React.FC<Props> = ({
 						<IconButton onClick={() => alert('share')}>
 							<ShareOutlined />
 						</IconButton>
-						<IconButton onClick={handleFavorite}>
-							{favoriteId ? (
-								<Star sx={{ color: 'star' }} />
-							) : (
-								<StarOutline sx={{ color: 'star' }} />
-							)}
-						</IconButton>
+						<FavoriteButton offerId={offerId} />
 					</div>
 				</CardActions>
 				<CardContent>
