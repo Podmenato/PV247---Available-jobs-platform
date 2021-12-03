@@ -19,9 +19,9 @@ const Trending = () => {
 					d =>
 						(favorites[d.data().offer] = (favorites[d.data().offer] || 0) + 1)
 				);
-				const keys = Object.keys(favorites);
-				keys.sort((x, y) => favorites[x] - favorites[y]);
-				setTrending(keys);
+				setTrending(
+					Object.keys(favorites).sort((x, y) => favorites[x] - favorites[y])
+				);
 			}),
 		[]
 	);
