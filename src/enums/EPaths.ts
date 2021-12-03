@@ -3,5 +3,6 @@ export enum EPaths {
 	SETTINGS = '/settings',
 	CHANGE_SETTINGS = '/change',
 	OFFER = '/:id',
+	FAVORITES = '/favorites',
 	LOGIN = '/login'
 }
