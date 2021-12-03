@@ -27,8 +27,6 @@ import FavoriteButton from './FavoriteButton';
 
 type Props = {
 	offerId: string;
-	handleFavorite: () => void;
-	favoriteId: string | undefined;
 	jobParams: IJobOffer;
 };
 
