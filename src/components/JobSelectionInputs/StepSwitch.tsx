@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import { EOfferSelectionSteps } from 'enums/EOfferSelectionSteps';
 import EducationSelection from 'components/JobSelectionInputs/EducationSelection';
 import { ISearchParams } from 'interfaces/ISearchParams';
+import FieldSelection from 'components/JobSelectionInputs/FieldSelection';
 
 type TProps = {
 	step: EOfferSelectionSteps;
@@ -16,7 +17,9 @@ const StepSwitch: FC<TProps> = ({ step, params, setParams }) => (
 		{step === EOfferSelectionSteps.EDUCATION && (
 			<EducationSelection params={params} setParams={setParams} />
 		)}
-		{step === EOfferSelectionSteps.FIELD && <div />}
+		{step === EOfferSelectionSteps.FIELD && (
+			<FieldSelection params={params} setParams={setParams} />
+		)}
 		{step === EOfferSelectionSteps.LANGUAGE && <div />}
 		{step === EOfferSelectionSteps.SALARY && <div>TEST</div>}
 		{step === EOfferSelectionSteps.SHIFT && <div />}
