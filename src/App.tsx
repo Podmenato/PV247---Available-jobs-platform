@@ -7,6 +7,7 @@ import Layout from 'components/Layout';
 import { LanguageProvider } from 'hooks/useTranslation';
 import { UserProvider } from 'hooks/useUser';
 import Settings from 'components/Settings';
+import PersonalizedProfile from 'components/PersonalizedProfile';
 import { OfferProvider } from 'hooks/useOffers';
 import Routing from 'components/Routing';
 
@@ -18,7 +19,16 @@ const App = () => (
 					<BrowserRouter>
 						<CssBaseline />
 						<Layout>
-							<Routing />
+							<Routes>
+								<Route path={EPaths.HOME} element={<Home />} />
+								<Route path={EPaths.LOGIN} element={<Login />} />
+								<Route path={EPaths.SETTINGS} element={<Settings />} />
+								<Route path={EPaths.OFFER} element={<Offer />} />
+								<Route
+									path={EPaths.PERSONALIZED}
+									element={<PersonalizedProfile />}
+								/>
+							</Routes>
 						</Layout>
 					</BrowserRouter>
 				</LanguageProvider>

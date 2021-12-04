@@ -5,7 +5,9 @@ import {
 	signInWithEmailAndPassword,
 	signOut as authSignOut,
 	onAuthStateChanged,
-	User
+	User,
+	updateEmail,
+	updatePassword
 } from 'firebase/auth';
 import {
 	collection,
@@ -51,3 +53,63 @@ export const favoritesCollection = collection(
 
 export const favoritesDocument = (id: string) =>
 	doc(db, 'favorites', id) as DocumentReference<Favorite>;
+
+// Settings collection
+export type SettingsType = {
+	firstName?: string;
+	lastName?: string;
+	education?: string;
+};
+
+export const settingsCollection = collection(
+	db,
+	'settings'
+) as CollectionReference<SettingsType>;
+
+export const settingsDocument = (id: string) =>
+	doc(db, 'settings', id) as DocumentReference<SettingsType>;
+
+export const changeMail = (mail: string) => {
+	if (auth.currentUser) {
+		updateEmail(auth.currentUser, mail)
+			.then(() => {
+				// Email updated!
+				// ...
+			})
+			.catch(() => {
+				// An error occurred
+				// ...
+			});
+	}
+};
+
+export const changePsswd = (newPassword: string) => {
+	if (auth.currentUser) {
+		updatePassword(auth.currentUser, newPassword)
+			.then(() => {
+				// Update successful.
+			})
+			.catch(() => {
+				// An error ocurred
+				// ...
+			});
+	}
+};
+
+// FilterSettings collection
+export type FilterSettingsType = {
+	workRelationship?: string;
+	suitableFor?: string;
+	salary?: number;
+	startingFrom?: string;
+	profession?: string;
+	city?: string;
+};
+
+export const filterSettingsCollection = collection(
+	db,
+	'filterSettings'
+) as CollectionReference<FilterSettingsType>;
+
+export const filterSettingsDocument = (id: string) =>
+	doc(db, 'filterSettings', id) as DocumentReference<FilterSettingsType>;
