@@ -30,7 +30,9 @@ const OfferContact: FC<Props> = ({ jobParams }) => {
 				`${jobParams.PRACOVISTE.ulice} ${jobParams.PRACOVISTE.cp} ${jobParams.PRACOVISTE.obec}`
 			);
 			const place = response[0];
-			setCoordinates(new LatLng(place.lat, place.lon));
+			if (place) {
+				setCoordinates(new LatLng(place.lat, place.lon));
+			}
 		};
 		findCoordinates();
 	}, [jobParams]);

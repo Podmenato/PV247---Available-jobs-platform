@@ -5,39 +5,32 @@ import {
 	CardHeader,
 	Typography
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { apiOfferById } from 'api/apiJobOffers';
 import { IJobOffer } from 'interfaces/IJobOffer';
 import FavoriteButton from 'components/FavoriteButton';
 import { useTranslation } from 'hooks/useTranslation';
 import { EPaths } from 'enums/EPaths';
 
 type Props = {
-	offerId: string;
+	jobOffer: IJobOffer;
 };
 
-const OfferPreview: React.FC<Props> = ({ offerId }) => {
-	const [jobParams, setJobParams] = useState<IJobOffer>();
+const OfferPreview: React.FC<Props> = ({ jobOffer }) => {
 	const t = useTranslation();
-
-	useEffect(() => {
-		apiOfferById(offerId).then(data => {
-			setJobParams(data);
-		});
-	}, [offerId]);
+	const { uid: offerId, PROFESE, FIRMA, PRACOVISTE, POZNAMKA } = jobOffer;
 
 	return (
 		<Card sx={{ width: '100%' }}>
 			<CardHeader
 				action={<FavoriteButton offerId={offerId} />}
-				title={jobParams?.PROFESE?.nazev}
-				subheader={`${jobParams?.FIRMA?.nazev}, ${jobParams?.PRACOVISTE.obec}`}
+				title={PROFESE?.nazev ?? t('no_title')}
+				subheader={`${FIRMA?.nazev}, ${PRACOVISTE.obec}`}
 			/>
 			<CardContent>
 				<Typography variant="body2">
-					{jobParams?.POZNAMKA.substr(0, 250)}...
+					{POZNAMKA ? `${POZNAMKA.substr(0, 250)}...` : t('no_description')}
 				</Typography>
 			</CardContent>
 			<CardActions sx={{ justifyContent: 'flex-end' }} disableSpacing>
