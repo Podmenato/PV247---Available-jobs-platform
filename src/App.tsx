@@ -1,18 +1,12 @@
 import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { theme } from 'theme';
-import { EPaths } from 'enums/EPaths';
-import Home from 'pages/Home';
-import Offer from 'pages/Offer';
-import Favorites from 'pages/Favorites';
-import Trending from 'pages/Trending';
 import Layout from 'components/Layout';
 import { LanguageProvider } from 'hooks/useTranslation';
-import Login from 'pages/Login';
 import { UserProvider } from 'hooks/useUser';
-import Settings from 'components/Settings';
+import Routing from 'components/Routing';
 
 const App = () => (
 	<ThemeProvider theme={theme}>
@@ -21,14 +15,7 @@ const App = () => (
 				<BrowserRouter>
 					<CssBaseline />
 					<Layout>
-						<Routes>
-							<Route path={EPaths.HOME} element={<Home />} />
-							<Route path={EPaths.LOGIN} element={<Login />} />
-							<Route path={EPaths.SETTINGS} element={<Settings />} />
-							<Route path={EPaths.OFFER} element={<Offer />} />
-							<Route path={EPaths.FAVORITES} element={<Favorites />} />
-							<Route path={EPaths.TRENDING} element={<Trending />} />
-						</Routes>
+						<Routing />
 					</Layout>
 				</BrowserRouter>
 			</LanguageProvider>
