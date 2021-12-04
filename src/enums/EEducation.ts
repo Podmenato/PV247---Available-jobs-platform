@@ -5,3 +5,5 @@ export enum EEducation {
 	K = 'ÚSV',
 	T = 'Vysokoškolské'
 }
+
+export const ALL_EDUCATION = Object.values(EEducation);
