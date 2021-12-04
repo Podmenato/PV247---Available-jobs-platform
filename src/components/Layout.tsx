@@ -22,7 +22,8 @@ const Layout: React.FC = ({ children }) => {
 					alignItems: 'center',
 					minHeight: '100vh',
 					pt: 8,
-					gap: 2
+					gap: 2,
+					padding: '100px 30px'
 				}}
 			>
 				{children}
