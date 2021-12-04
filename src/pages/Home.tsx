@@ -2,13 +2,14 @@ import * as React from 'react';
 import { Paper } from '@mui/material';
 
 import useOffers from 'hooks/useOffers';
-import OfferPreview from 'components/OfferPreview';
-import Filter from 'components/Filter';
-import { ALL_WORKER_TYPES, EWorkerType } from 'enums/EWorkerType';
+import OfferSelectionMobileStepper from 'components/JobSelectionInputs/OfferSelectionMobileStepper';
+import { usePlatform } from 'hooks/usePlatform';
+import { EPlatform } from 'enums/EPlatform';
 import OfferSelectionStepper from 'components/JobSelectionInputs/OfferSelectionStepper';
 
 const Home: React.FC = () => {
 	const offers = useOffers();
+	const platform = usePlatform();
 	// console.log(allOffers, 'offers');
 	//
 	// const [salaryValue, setSalaryValue] = React.useState('');
@@ -49,7 +50,8 @@ const Home: React.FC = () => {
 
 	return (
 		<Paper>
-			<OfferSelectionStepper />
+			{platform === EPlatform.DESKTOP && <OfferSelectionStepper />}
+			{platform !== EPlatform.DESKTOP && <OfferSelectionMobileStepper />}
 			{/*{offers.map(offer => (*/}
 			{/*	<OfferPreview key={offer.uid} jobOffer={offer} />*/}
 			{/*))}*/}
