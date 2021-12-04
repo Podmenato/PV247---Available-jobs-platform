@@ -7,6 +7,8 @@ import {
 	useState
 } from 'react';
 
+import { ELanguage } from 'enums/ELanguage';
+
 import localization from '../localization';
 
 type Languages = keyof typeof localization;
@@ -16,8 +18,7 @@ type LanguageState = [Languages, Dispatch<SetStateAction<Languages>>];
 const LanguageContext = createContext<LanguageState>(undefined as never);
 
 export const LanguageProvider: FC = ({ children }) => {
-	// TODO: load initial language from local storage
-	const languageState = useState<Languages>('en');
+	const languageState = useState<Languages>(ELanguage.EN);
 	return (
 		<LanguageContext.Provider value={languageState}>
 			{children}
