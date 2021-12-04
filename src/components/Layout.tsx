@@ -1,46 +1,17 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { AppBar, Container, Toolbar, Button } from '@mui/material';
+import { Container } from '@mui/material';
 
-import { EPaths } from 'enums/EPaths';
-import { useTranslation } from 'hooks/useTranslation';
-import useUser from 'hooks/useUser';
-import { signOut } from 'utils/firebase';
+import NavigationDrawer from 'components/NavigationDrawer';
+import { usePlatform } from 'hooks/usePlatform';
+import { EPlatform } from 'enums/EPlatform';
+import NavigationAppBar from 'components/NavigationAppBar';
 
 const Layout: React.FC = ({ children }) => {
-	const t = useTranslation();
-	const user = useUser();
-
+	const platform = usePlatform();
 	return (
 		<>
-			<AppBar position="fixed">
-				<Container maxWidth="sm">
-					<Toolbar disableGutters sx={{ gap: 2 }}>
-						<Button variant="contained" component={Link} to={EPaths.HOME}>
-							{t('home')}
-						</Button>
-						<Button variant="contained" component={Link} to={EPaths.TRENDING}>
-							{t('trending')}
-						</Button>
-						{user && (
-							<Button variant="contained" component={Link} to={EPaths.SETTINGS}>
-								{t('settings')}
-							</Button>
-						)}
-						{!user && (
-							<Button variant="contained" component={Link} to={EPaths.LOGIN}>
-								{t('login')}
-							</Button>
-						)}
-						{user && (
-							<Button variant="contained" onClick={signOut}>
-								{t('logout')}
-							</Button>
-						)}
-					</Toolbar>
-				</Container>
-			</AppBar>
-
+			{platform !== EPlatform.MOBILE && <NavigationAppBar />}
+			{platform === EPlatform.MOBILE && <NavigationDrawer />}
 			<Container
 				maxWidth="lg"
 				component="main"
