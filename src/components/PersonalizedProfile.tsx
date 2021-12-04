@@ -1,5 +1,7 @@
 import { setDoc } from '@firebase/firestore';
 import {
+	Alert,
+	AlertTitle,
 	Button,
 	Container,
 	FormControl,
@@ -49,18 +51,33 @@ const PersonalizedProfile = () => {
 		console.log(state.city);
 	};
 	const user = useUser();
+	const [emptyFieldsError, setEmptyFieldsError] = useState(false);
 	const [submitError, setSubmitError] = useState<string>();
 	const submit = async () => {
 		try {
-			if (user?.email) {
-				await setDoc(filterSettingsDocument(user?.email), {
-					workRelationship,
-					suitableFor,
-					salary: state.salary,
-					startingFrom: state.startingFrom,
-					profession: state.profession,
-					city: state.city
-				});
+			if (
+				workRelationship === '' ||
+				suitableFor === '' ||
+				state.startingFrom === '' ||
+				state.profession === '' ||
+				state.city === '' ||
+				!state.salary
+			) {
+				setEmptyFieldsError(true);
+			} else {
+				setEmptyFieldsError(false);
+				if (user?.email) {
+					console.log(state.city);
+					console.log(user?.email);
+					await setDoc(filterSettingsDocument(user?.email), {
+						workRelationship,
+						suitableFor,
+						salary: state.salary,
+						startingFrom: state.startingFrom,
+						profession: state.profession,
+						city: state.city
+					});
+				}
 			}
 		} catch (err) {
 			setSubmitError(
@@ -144,7 +161,13 @@ const PersonalizedProfile = () => {
 					{submitError}
 				</Typography>
 			)}
-			<Button onClick={submit}>TEST</Button>
+			{emptyFieldsError && (
+				<Alert severity="error">
+					<AlertTitle>Error</AlertTitle>
+					Fields can not be empty
+				</Alert>
+			)}
+			<Button onClick={submit}>Submit</Button>
 		</Container>
 	);
 };

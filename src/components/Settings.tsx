@@ -1,5 +1,7 @@
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import {
+	Alert,
+	AlertTitle,
 	Button,
 	Container,
 	FormControl,
@@ -84,24 +86,34 @@ const Settings = () => {
 	};
 	//submitting
 	const user = useUser();
+	const [emptyFieldsError, setEmptyFieldsError] = useState(false);
 	const [submitError, setSubmitError] = useState<string>();
 	const submit = async () => {
 		try {
-			if (user?.email) {
-				await setDoc(settingsDocument(user?.email), {
-					firstName: state.firstName,
-					lastName: state.lastName,
-					education: state.education
-				});
-				if (!mailValid) {
-					console.log(mail);
-					if (mail) {
-						changeMail(mail);
+			if (
+				state.firstName === '' ||
+				state.lastName === '' ||
+				state.education === ''
+			) {
+				setEmptyFieldsError(true);
+			} else {
+				setEmptyFieldsError(false);
+				if (user?.email) {
+					await setDoc(settingsDocument(user?.email), {
+						firstName: state.firstName,
+						lastName: state.lastName,
+						education: state.education
+					});
+					if (!mailValid) {
+						console.log(mail);
+						if (mail) {
+							changeMail(mail);
+						}
 					}
-				}
-				if (!passwordsDiffer && password) {
-					console.log(password);
-					changePsswd(password);
+					if (!passwordsDiffer && password) {
+						console.log(password);
+						changePsswd(password);
+					}
 				}
 			}
 		} catch (err) {
@@ -214,6 +226,12 @@ const Settings = () => {
 				<Typography variant="subtitle2" align="left" color="error" paragraph>
 					{submitError}
 				</Typography>
+			)}
+			{emptyFieldsError && (
+				<Alert severity="error">
+					<AlertTitle>Error</AlertTitle>
+					First name, last name and education can not be empty
+				</Alert>
 			)}
 			<Button onClick={submit}>Submit</Button>
 		</Container>
