@@ -29,5 +29,8 @@ export default {
 	show_more: 'Zobraziť viac',
 	favorite_offers: 'Moje obľúbené ponuky',
 	trending_offers: 'Trending ponuky',
-	trending: 'Trending'
+	trending: 'Trending',
+	no_title: 'Bez názvu',
+	no_description: 'Bez popisu',
+	apply_filter: 'Aplikovať filter'
 };

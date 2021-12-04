@@ -29,5 +29,8 @@ export default {
 	show_more: 'Show more',
 	favorite_offers: 'My favorite offers',
 	trending_offers: 'Trending offers',
-	trending: 'Trending'
+	trending: 'Trending',
+	no_title: 'No job title',
+	no_description: 'No description',
+	apply_filter: 'Apply filter'
 };
