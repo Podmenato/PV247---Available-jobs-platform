@@ -3,12 +3,14 @@ import { onSnapshot } from '@firebase/firestore';
 import { Typography } from '@mui/material';
 
 import { useTranslation } from 'hooks/useTranslation';
+import LoadingBackdrop from 'components/LoadingBackdrop';
+import { favoritesCollection } from 'utils/firebase';
 
-import { favoritesCollection } from '../utils/firebase';
 import OfferPreview from '../components/OfferPreview';
 
 const Trending = () => {
 	const [trending, setTrending] = useState<string[]>();
+	const [loading, setLoading] = useState(true);
 	const t = useTranslation();
 
 	useEffect(
@@ -22,6 +24,7 @@ const Trending = () => {
 				setTrending(
 					Object.keys(favorites).sort((x, y) => favorites[x] - favorites[y])
 				);
+				setLoading(false);
 			}),
 		[]
 	);
@@ -32,6 +35,7 @@ const Trending = () => {
 			{trending?.map((offer, key) => (
 				<OfferPreview key={key} offerId={offer} />
 			))}
+			<LoadingBackdrop loading={loading} />
 		</>
 	);
 };
