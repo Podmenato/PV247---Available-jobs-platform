@@ -19,16 +19,7 @@ const App = () => (
 					<BrowserRouter>
 						<CssBaseline />
 						<Layout>
-							<Routes>
-								<Route path={EPaths.HOME} element={<Home />} />
-								<Route path={EPaths.LOGIN} element={<Login />} />
-								<Route path={EPaths.SETTINGS} element={<Settings />} />
-								<Route path={EPaths.OFFER} element={<Offer />} />
-								<Route
-									path={EPaths.PERSONALIZED}
-									element={<PersonalizedProfile />}
-								/>
-							</Routes>
+							<Routing />
 						</Layout>
 					</BrowserRouter>
 				</LanguageProvider>
