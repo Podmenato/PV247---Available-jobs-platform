@@ -4,3 +4,5 @@ export enum EShifts {
 	FLEX = 'Pružná pracovní doba',
 	TURNUS = 'Turnusové služby'
 }
+
+export const ALL_SHIFTS = Object.values(EShifts);

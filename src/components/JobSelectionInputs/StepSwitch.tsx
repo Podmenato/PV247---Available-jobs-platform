@@ -5,6 +5,11 @@ import { EOfferSelectionSteps } from 'enums/EOfferSelectionSteps';
 import EducationSelection from 'components/JobSelectionInputs/EducationSelection';
 import { ISearchParams } from 'interfaces/ISearchParams';
 import FieldSelection from 'components/JobSelectionInputs/FieldSelection';
+import ShiftsSelection from 'components/JobSelectionInputs/ShiftsSelection';
+import WorkLanguageSelection from 'components/JobSelectionInputs/WorkLanguageSelection';
+import WorkRelationshipTypeSelection from 'components/JobSelectionInputs/WorkRelationshipTypeSelection';
+import WorkerTypeSelection from 'components/JobSelectionInputs/WorkerTypeSelection';
+import SalaryInput from 'components/JobSelectionInputs/SalaryInput';
 
 type TProps = {
 	step: EOfferSelectionSteps;
@@ -20,11 +25,21 @@ const StepSwitch: FC<TProps> = ({ step, params, setParams }) => (
 		{step === EOfferSelectionSteps.FIELD && (
 			<FieldSelection params={params} setParams={setParams} />
 		)}
-		{step === EOfferSelectionSteps.LANGUAGE && <div />}
-		{step === EOfferSelectionSteps.SALARY && <div>TEST</div>}
-		{step === EOfferSelectionSteps.SHIFT && <div />}
-		{step === EOfferSelectionSteps.WORK_RELATIONSHIP && <div />}
-		{step === EOfferSelectionSteps.WORKER_TYPE && <div />}
+		{step === EOfferSelectionSteps.LANGUAGE && (
+			<WorkLanguageSelection params={params} setParams={setParams} />
+		)}
+		{step === EOfferSelectionSteps.SALARY && (
+			<SalaryInput params={params} setParams={setParams} />
+		)}
+		{step === EOfferSelectionSteps.SHIFT && (
+			<ShiftsSelection params={params} setParams={setParams} />
+		)}
+		{step === EOfferSelectionSteps.WORK_RELATIONSHIP && (
+			<WorkRelationshipTypeSelection params={params} setParams={setParams} />
+		)}
+		{step === EOfferSelectionSteps.WORKER_TYPE && (
+			<WorkerTypeSelection params={params} setParams={setParams} />
+		)}
 	</Box>
 );
 

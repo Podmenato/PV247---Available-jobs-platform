@@ -5,3 +5,5 @@ export enum EWorkRelationshipType {
 	JOB = 'DPP',
 	CONTRACT = 'DPČ'
 }
+
+export const ALL_RELATIONSHIP_TYPES = Object.values(EWorkRelationshipType);

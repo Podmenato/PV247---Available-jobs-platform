@@ -41,6 +41,7 @@ export type ISearchParams = {
 		JOB: boolean;
 		CONTRACT: boolean;
 	};
+	salary: number;
 };
 
 export const emptyParams = {
@@ -85,5 +86,6 @@ export const emptyParams = {
 		SP: false,
 		JOB: false,
 		CONTRACT: false
-	}
+	},
+	salary: 0
 };
