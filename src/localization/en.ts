@@ -28,5 +28,6 @@ export default {
 	settings: 'Settings',
 	show_more: 'Show more',
 	favorite_offers: 'My favorite offers',
-	trending_offers: 'Trending offers'
+	trending_offers: 'Trending offers',
+	trending: 'Trending'
 };

@@ -28,5 +28,6 @@ export default {
 	settings: 'Nastavenia',
 	show_more: 'Zobraziť viac',
 	favorite_offers: 'Moje obľúbené ponuky',
-	trending_offers: 'Trending ponuky'
+	trending_offers: 'Trending ponuky',
+	trending: 'Trending'
 };
