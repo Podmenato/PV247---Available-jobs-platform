@@ -8,6 +8,7 @@ import Settings from 'components/Settings';
 import Offer from 'pages/Offer';
 import Favorites from 'pages/Favorites';
 import Trending from 'pages/Trending';
+import PersonalizedProfile from 'components/PersonalizedProfile'
 
 const Routing = () => (
 	<Routes>
@@ -17,6 +18,7 @@ const Routing = () => (
 		<Route path={EPaths.OFFER} element={<Offer />} />
 		<Route path={EPaths.FAVORITES} element={<Favorites />} />
 		<Route path={EPaths.TRENDING} element={<Trending />} />
+		<Route path={EPaths.PERSONALIZED} element={<PersonalizedProfile />} />
 	</Routes>
 );
 

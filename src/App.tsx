@@ -7,6 +7,7 @@ import Layout from 'components/Layout';
 import { LanguageProvider } from 'hooks/useTranslation';
 import { UserProvider } from 'hooks/useUser';
 import Settings from 'components/Settings';
+import PersonalizedProfile from 'components/PersonalizedProfile';
 import { OfferProvider } from 'hooks/useOffers';
 import Routing from 'components/Routing';
 

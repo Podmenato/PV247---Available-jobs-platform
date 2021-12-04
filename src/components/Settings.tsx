@@ -1,6 +1,7 @@
 import { VisibilityOff, Visibility } from '@mui/icons-material';
-import EditIcon from '@mui/icons-material/Edit';
 import {
+	Alert,
+	AlertTitle,
 	Button,
 	Container,
 	FormControl,
@@ -12,14 +13,17 @@ import {
 	TextField,
 	Typography
 } from '@mui/material';
+import { setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
+
+import useUser from 'hooks/useUser';
+import { changeMail, changePsswd, settingsDocument } from 'utils/firebase';
 
 const Settings = () => {
 	const [state, setState] = React.useState({
 		firstName: '',
 		lastName: '',
-		education: '',
-		mail: ''
+		education: ''
 	});
 	const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
 		const value = evt.target.value;
@@ -80,66 +84,43 @@ const Settings = () => {
 			password
 		);
 	};
-	// changing
-	const [showEditing, setShowEditing] = useState(false);
-	const [insertedOldPassword, setInsertedOldPassword] = useState<string>();
-	const [oldPasswordTouched, setOldPasswordTouched] = useState(false);
-	const handleChangeOldPassword = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setInsertedOldPassword(event.target.value);
-		setOldPasswordTouched(true);
-		setShowFormular(true);
-	};
-	const [showFormular, setShowFormular] = useState(false);
-	const passwordSame = insertedOldPassword === password || !oldPasswordTouched;
-	const [newPassword, setNewPassword] = useState<string>();
-	const [newPasswordRepeated, setNewPasswordRepeated] = useState<string>();
-	const [newPasswordTouched, setNewPasswordTouched] = useState(false);
-	const [newPasswordRepatedTouched, setNewPasswordRepeatedTouched] =
-		useState(false);
-	const newPasswordsDiffer =
-		newPasswordTouched &&
-		newPasswordRepatedTouched &&
-		newPassword !== newPasswordRepeated;
-	const [showInsertedOldPassword, setShowInsertedOldPassword] = useState(false);
-	const [showNewPassword, setShowNewPassword] = useState(false);
-	const [showNewPassword_2, setShowNewPassword_2] = useState(false);
-	const handleChangeNewPassword = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setNewPassword(event.target.value);
-		setNewPasswordTouched(true);
-	};
-	const handleChangeNewPasswordRepeated = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setNewPasswordRepeated(event.target.value);
-		setNewPasswordRepeatedTouched(true);
-	};
-	const handleClickShowInsertedOldPassword = () => {
-		setShowInsertedOldPassword(!showPassword);
-	};
-	const handleMouseDownInsertedOldPassword = (event: {
-		preventDefault: () => void;
-	}) => {
-		event.preventDefault();
-	};
-	const handleClickShowNewPassword = () => {
-		setShowNewPassword(!showPassword);
-	};
-	const handleMouseDownNewPassword = (event: {
-		preventDefault: () => void;
-	}) => {
-		event.preventDefault();
-	};
-	const handleClickShowNewPassword_2 = () => {
-		setShowNewPassword_2(!showPassword_2);
-	};
-	const handleMouseDownNewPassword_2 = (event: {
-		preventDefault: () => void;
-	}) => {
-		event.preventDefault();
+	//submitting
+	const user = useUser();
+	const [emptyFieldsError, setEmptyFieldsError] = useState(false);
+	const [submitError, setSubmitError] = useState<string>();
+	const submit = async () => {
+		try {
+			if (
+				state.firstName === '' ||
+				state.lastName === '' ||
+				state.education === ''
+			) {
+				setEmptyFieldsError(true);
+			} else {
+				setEmptyFieldsError(false);
+				if (user?.email) {
+					await setDoc(settingsDocument(user?.email), {
+						firstName: state.firstName,
+						lastName: state.lastName,
+						education: state.education
+					});
+					if (!mailValid) {
+						console.log(mail);
+						if (mail) {
+							changeMail(mail);
+						}
+					}
+					if (!passwordsDiffer && password) {
+						console.log(password);
+						changePsswd(password);
+					}
+				}
+			}
+		} catch (err) {
+			setSubmitError(
+				(err as { message?: string })?.message ?? 'Unknown error occurred'
+			);
+		}
 	};
 	return (
 		<Container>
@@ -240,112 +221,19 @@ const Settings = () => {
 						/>
 					</FormControl>
 				</Stack>
-				<Stack spacing={2}>
-					<IconButton onClick={() => setShowEditing(!showEditing)}>
-						<EditIcon />
-					</IconButton>
-					{showEditing && (
-						<Typography variant="h6">Type old password</Typography>
-					)}
-					{showEditing && (
-						<FormControl
-							sx={{ m: 1, width: '50ch' }}
-							variant="outlined"
-							error={!passwordSame}
-						>
-							<InputLabel htmlFor="outlined-adornment-password">
-								{!passwordSame ? 'Wrong password' : ''}
-							</InputLabel>
-							<OutlinedInput
-								id="outlined-adornment-password"
-								type={showInsertedOldPassword ? 'text' : 'password'}
-								value={insertedOldPassword}
-								error={!passwordSame}
-								onChange={handleChangeOldPassword}
-								endAdornment={
-									<InputAdornment position="end">
-										<IconButton
-											aria-label="toggle password visibility"
-											onClick={handleClickShowInsertedOldPassword}
-											onMouseDown={handleMouseDownInsertedOldPassword}
-											edge="end"
-										>
-											{showInsertedOldPassword ? (
-												<VisibilityOff />
-											) : (
-												<Visibility />
-											)}
-										</IconButton>
-									</InputAdornment>
-								}
-								label="Password"
-							/>
-						</FormControl>
-					)}
-					{showEditing && passwordSame && showFormular && (
-						<Typography variant="h6">New password</Typography>
-					)}
-					{showEditing && passwordSame && showFormular && (
-						<FormControl
-							sx={{ m: 1, width: '50ch' }}
-							variant="outlined"
-							error={newPasswordsDiffer}
-						>
-							<InputLabel htmlFor="outlined-adornment-password">
-								{newPasswordsDiffer ? 'Passwords differ!' : 'Password'}
-							</InputLabel>
-							<OutlinedInput
-								id="outlined-adornment-password"
-								type={showNewPassword ? 'text' : 'password'}
-								value={newPassword}
-								error={newPasswordsDiffer}
-								onChange={handleChangeNewPassword}
-								endAdornment={
-									<InputAdornment position="end">
-										<IconButton
-											aria-label="toggle password visibility"
-											onClick={handleClickShowNewPassword}
-											onMouseDown={handleMouseDownNewPassword}
-											edge="end"
-										>
-											{showNewPassword ? <VisibilityOff /> : <Visibility />}
-										</IconButton>
-									</InputAdornment>
-								}
-								label="Password"
-							/>
-						</FormControl>
-					)}
-					{showEditing && passwordSame && showFormular && (
-						<FormControl sx={{ m: 1, width: '50ch' }} variant="outlined">
-							<InputLabel htmlFor="outlined-adornment-password">
-								{newPasswordsDiffer ? 'Passwords differ!' : 'Password'}
-							</InputLabel>
-							<OutlinedInput
-								id="outlined-adornment-password"
-								type={showNewPassword_2 ? 'text' : 'password'}
-								value={newPasswordRepeated}
-								error={newPasswordsDiffer}
-								onChange={handleChangeNewPasswordRepeated}
-								endAdornment={
-									<InputAdornment position="end">
-										<IconButton
-											aria-label="toggle password visibility"
-											onClick={handleClickShowNewPassword_2}
-											onMouseDown={handleMouseDownNewPassword_2}
-											edge="end"
-										>
-											{showNewPassword_2 ? <VisibilityOff /> : <Visibility />}
-										</IconButton>
-									</InputAdornment>
-								}
-								label="Repeat Password"
-							/>
-						</FormControl>
-					)}
-				</Stack>
 			</Stack>
-			<Button onClick={test}>Submit</Button>
+			{submitError && (
+				<Typography variant="subtitle2" align="left" color="error" paragraph>
+					{submitError}
+				</Typography>
+			)}
+			{emptyFieldsError && (
+				<Alert severity="error">
+					<AlertTitle>Error</AlertTitle>
+					First name, last name and education can not be empty
+				</Alert>
+			)}
+			<Button onClick={submit}>Submit</Button>
 		</Container>
 	);
 };
