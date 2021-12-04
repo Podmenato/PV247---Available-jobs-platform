@@ -38,7 +38,7 @@ const Login: FC = () => {
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
-				width: '100%',
+				width: '40vw',
 				p: 4,
 				gap: 2
 			}}

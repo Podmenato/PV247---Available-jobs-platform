@@ -54,11 +54,9 @@ const Home: React.FC = () => {
 				onSalaryValueChange={onSalaryValueChange}
 				onWorkerTypeValuesChange={onWorkerTypeValuesChange}
 			/>
-			<Paper>
-				{offers.map(offer => (
-					<OfferPreview key={offer.uid} jobOffer={offer} />
-				))}
-			</Paper>
+			{offers.map(offer => (
+				<OfferPreview key={offer.uid} jobOffer={offer} />
+			))}
 		</>
 	);
 };

@@ -22,7 +22,7 @@ const OfferPreview: React.FC<Props> = ({ jobOffer }) => {
 	const { uid: offerId, PROFESE, FIRMA, PRACOVISTE, POZNAMKA } = jobOffer;
 
 	return (
-		<Card sx={{ width: '100%' }}>
+		<Card sx={{ width: '100%', padding: '20px 50px', margin: '10px 0' }}>
 			<CardHeader
 				action={<FavoriteButton offerId={offerId} />}
 				title={PROFESE?.nazev ?? t('no_title')}
@@ -34,7 +34,12 @@ const OfferPreview: React.FC<Props> = ({ jobOffer }) => {
 				</Typography>
 			</CardContent>
 			<CardActions sx={{ justifyContent: 'flex-end' }} disableSpacing>
-				<Link to={EPaths.OFFER.replace(':id', offerId)}>{t('show_more')}</Link>
+				<Link
+					to={EPaths.OFFER.replace(':id', offerId)}
+					style={{ textDecoration: 'none', color: '#2E3F7F' }}
+				>
+					{t('show_more')}
+				</Link>
 			</CardActions>
 		</Card>
 	);

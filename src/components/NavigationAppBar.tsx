@@ -10,33 +10,66 @@ import useUser from 'hooks/useUser';
 const NavigationAppBar = () => {
 	const t = useTranslation();
 	const user = useUser();
+
 	return (
-		<AppBar position="fixed">
-			<Container maxWidth="sm">
-				<Toolbar disableGutters sx={{ gap: 2 }}>
-					<Button variant="contained" component={Link} to={EPaths.HOME}>
-						{t('home')}
+		<AppBar position="fixed" sx={{ padding: '0 50px' }}>
+			<Toolbar disableGutters sx={{ gap: 2 }}>
+				<Button
+					variant="text"
+					component={Link}
+					to={EPaths.HOME}
+					sx={{ color: 'white' }}
+				>
+					{t('home')}
+				</Button>
+				<Button
+					variant="text"
+					component={Link}
+					to={EPaths.TRENDING}
+					sx={{ color: 'white' }}
+				>
+					{t('trending')}
+				</Button>
+				{user && (
+					<Button
+						variant="text"
+						component={Link}
+						to={EPaths.FAVORITES}
+						sx={{ color: 'white' }}
+					>
+						{t('favorite_offers')}
 					</Button>
-					<Button variant="contained" component={Link} to={EPaths.TRENDING}>
-						{t('trending')}
+				)}
+				{user && (
+					<Button
+						variant="text"
+						component={Link}
+						to={EPaths.SETTINGS}
+						sx={{ color: 'white' }}
+					>
+						{t('settings')}
 					</Button>
-					{user && (
-						<Button variant="contained" component={Link} to={EPaths.SETTINGS}>
-							{t('settings')}
-						</Button>
-					)}
-					{!user && (
-						<Button variant="contained" component={Link} to={EPaths.LOGIN}>
-							{t('login')}
-						</Button>
-					)}
-					{user && (
-						<Button variant="contained" onClick={signOut}>
-							{t('logout')}
-						</Button>
-					)}
-				</Toolbar>
-			</Container>
+				)}
+				{!user && (
+					<Button
+						variant="text"
+						component={Link}
+						to={EPaths.LOGIN}
+						sx={{ color: 'white', marginLeft: 'auto' }}
+					>
+						{t('login')}
+					</Button>
+				)}
+				{user && (
+					<Button
+						variant="text"
+						onClick={signOut}
+						sx={{ color: 'white', marginLeft: 'auto' }}
+					>
+						{t('logout')}
+					</Button>
+				)}
+			</Toolbar>
 		</AppBar>
 	);
 };

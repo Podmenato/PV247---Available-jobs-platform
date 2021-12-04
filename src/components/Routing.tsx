@@ -8,7 +8,7 @@ import Settings from 'components/Settings';
 import Offer from 'pages/Offer';
 import Favorites from 'pages/Favorites';
 import Trending from 'pages/Trending';
-import PersonalizedProfile from 'components/PersonalizedProfile'
+import PersonalizedProfile from 'components/PersonalizedProfile';
 
 const Routing = () => (
 	<Routes>
