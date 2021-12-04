@@ -91,7 +91,12 @@ export type IJobOffer = {
 	VOLNE_MISTO: null;
 	vyraditDne: string;
 	POZNAMKA: string;
-	JAZYK: string;
+	JAZYK: {
+		kod: string;
+		nazev: string;
+		urovenKod: string;
+		uroven: string;
+	} | null;
 	OBOR: {
 		kod: string;
 		nazev: string;

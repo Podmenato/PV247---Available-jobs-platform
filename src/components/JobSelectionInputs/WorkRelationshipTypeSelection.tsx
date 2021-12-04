@@ -19,8 +19,8 @@ const WorkRelationshipTypeSelection: FC<TProps> = ({ params, setParams }) => {
 	) => {
 		const newParameters = { ...params };
 		switch (label) {
-			case EWorkRelationshipType.CONTRACT: {
-				newParameters.relationship.CONTRACT = event.target.checked;
+			case EWorkRelationshipType.DPC: {
+				newParameters.relationship.DPC = event.target.checked;
 				setParams(newParameters);
 				return;
 			}
@@ -29,8 +29,8 @@ const WorkRelationshipTypeSelection: FC<TProps> = ({ params, setParams }) => {
 				setParams(newParameters);
 				return;
 			}
-			case EWorkRelationshipType.JOB: {
-				newParameters.relationship.JOB = event.target.checked;
+			case EWorkRelationshipType.DPP: {
+				newParameters.relationship.DPP = event.target.checked;
 				setParams(newParameters);
 				return;
 			}
@@ -55,12 +55,12 @@ const WorkRelationshipTypeSelection: FC<TProps> = ({ params, setParams }) => {
 				return params.relationship.SP;
 			case EWorkRelationshipType.PART:
 				return params.relationship.PART;
-			case EWorkRelationshipType.JOB:
-				return params.relationship.JOB;
+			case EWorkRelationshipType.DPP:
+				return params.relationship.DPP;
 			case EWorkRelationshipType.FULL:
 				return params.relationship.FULL;
-			case EWorkRelationshipType.CONTRACT:
-				return params.relationship.CONTRACT;
+			case EWorkRelationshipType.DPC:
+				return params.relationship.DPC;
 			default: {
 				return false;
 			}

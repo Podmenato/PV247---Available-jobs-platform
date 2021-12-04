@@ -7,16 +7,19 @@ import {
 	Stepper,
 	Typography
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import { StepsNames } from 'enums/EOfferSelectionSteps';
 import StepSwitch from 'components/JobSelectionInputs/StepSwitch';
 import { emptyParams, ISearchParams } from 'interfaces/ISearchParams';
+import { EPaths } from 'enums/EPaths';
 
 const steps = StepsNames;
 
 const OfferSelectionStepper = () => {
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [params, setParams] = useState<ISearchParams>(emptyParams);
+	const navigate = useNavigate();
 
 	const handleNext = () => {
 		setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -26,8 +29,8 @@ const OfferSelectionStepper = () => {
 		setActiveStep(prevActiveStep => prevActiveStep - 1);
 	};
 
-	const handleReset = () => {
-		setActiveStep(0);
+	const handleSearch = () => {
+		navigate(EPaths.LIST, { state: { params } });
 	};
 
 	return (
@@ -54,7 +57,7 @@ const OfferSelectionStepper = () => {
 					</Box>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Box sx={{ flex: '1 1 auto' }} />
-						<Button onClick={handleReset}>Reset</Button>
+						<Button onClick={handleSearch}>Search</Button>
 					</Box>
 				</>
 			) : (
