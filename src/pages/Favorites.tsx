@@ -4,8 +4,8 @@ import { Typography } from '@mui/material';
 
 import useUser from 'hooks/useUser';
 import { favoritesCollection } from 'utils/firebase';
-import OfferPreview from 'components/OfferPreview';
 import { useTranslation } from 'hooks/useTranslation';
+import FavoriteOfferPreview from 'components/FavoriteOfferPreview';
 
 const Favorites = () => {
 	const [favorites, setFavorites] = useState<string[]>([]);
@@ -28,7 +28,7 @@ const Favorites = () => {
 		<>
 			<Typography variant="h2">{t('favorite_offers')}</Typography>
 			{favorites.map((id, key) => (
-				<OfferPreview key={key} offerId={id} />
+				<FavoriteOfferPreview key={key} offerId={id} />
 			))}
 		</>
 	);

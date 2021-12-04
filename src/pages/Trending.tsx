@@ -5,8 +5,7 @@ import { Typography } from '@mui/material';
 import { useTranslation } from 'hooks/useTranslation';
 import LoadingBackdrop from 'components/LoadingBackdrop';
 import { favoritesCollection } from 'utils/firebase';
-
-import OfferPreview from '../components/OfferPreview';
+import FavoriteOfferPreview from 'components/FavoriteOfferPreview';
 
 const Trending = () => {
 	const [trending, setTrending] = useState<string[]>();
@@ -33,7 +32,7 @@ const Trending = () => {
 		<>
 			<Typography variant="h2">{t('trending_offers')}</Typography>
 			{trending?.map((offer, key) => (
-				<OfferPreview key={key} offerId={offer} />
+				<FavoriteOfferPreview key={key} offerId={offer} />
 			))}
 			<LoadingBackdrop loading={loading} />
 		</>
