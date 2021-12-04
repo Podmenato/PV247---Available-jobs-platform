@@ -32,7 +32,7 @@ const FavoriteButton: React.FC<Props> = ({ offerId }) => {
 		return () => {
 			unsubscribe();
 		};
-	}, [user]);
+	}, [offerId, user]);
 
 	const handleFavorite = async () => {
 		if (!user?.email || !offerId) {
