@@ -14,10 +14,14 @@ declare module '@mui/material/styles' {
 export const theme = createTheme({
 	palette: {
 		primary: {
-			main: '#ff0000'
+			light: '#435cb9',
+			main: '#2E3F7F',
+			dark: '#1e2a54'
 		},
 		secondary: {
-			main: '#0249ff'
+			light: '#fdae67',
+			main: '#FC9A40',
+			dark: '#fb7b06'
 		},
 		star: '#ff9529'
 	},
