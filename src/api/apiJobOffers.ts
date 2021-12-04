@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 import { IJobOffer } from 'interfaces/IJobOffer';
+import { TApiJobOffer } from 'interfaces/TApiJobOffer';
 
 const API_KEY = 'cpJjsgpbVA7RKtZ6m1kcw7YDcbx751AH6wtb9e3Y';
 
-export const apiAllOffers = async (): Promise<IJobOffer[]> => {
+export const apiAllOffers = async (): Promise<TApiJobOffer> => {
 	const headers = {
 		'x-api-key': API_KEY
 	};

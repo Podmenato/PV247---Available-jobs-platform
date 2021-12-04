@@ -6,20 +6,24 @@ import { theme } from 'theme';
 import Layout from 'components/Layout';
 import { LanguageProvider } from 'hooks/useTranslation';
 import { UserProvider } from 'hooks/useUser';
+import Settings from 'components/Settings';
+import { OfferProvider } from 'hooks/useOffers';
 import Routing from 'components/Routing';
 
 const App = () => (
 	<ThemeProvider theme={theme}>
-		<UserProvider>
-			<LanguageProvider>
-				<BrowserRouter>
-					<CssBaseline />
-					<Layout>
-						<Routing />
-					</Layout>
-				</BrowserRouter>
-			</LanguageProvider>
-		</UserProvider>
+		<OfferProvider>
+			<UserProvider>
+				<LanguageProvider>
+					<BrowserRouter>
+						<CssBaseline />
+						<Layout>
+							<Routing />
+						</Layout>
+					</BrowserRouter>
+				</LanguageProvider>
+			</UserProvider>
+		</OfferProvider>
 	</ThemeProvider>
 );
 
