@@ -27,5 +27,6 @@ export default {
 	contact_person: 'Kontaktná osoba',
 	settings: 'Nastavenia',
 	show_more: 'Zobraziť viac',
-	favorite_offers: 'Moje obľúbené ponuky'
+	favorite_offers: 'Moje obľúbené ponuky',
+	trending_offers: 'Trending ponuky'
 };

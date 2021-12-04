@@ -27,5 +27,6 @@ export default {
 	contact_person: 'Contact person',
 	settings: 'Settings',
 	show_more: 'Show more',
-	favorite_offers: 'My favorite offers'
+	favorite_offers: 'My favorite offers',
+	trending_offers: 'Trending offers'
 };

@@ -12,6 +12,7 @@ import { apiOfferById } from 'api/apiJobOffers';
 import { IJobOffer } from 'interfaces/IJobOffer';
 import FavoriteButton from 'components/FavoriteButton';
 import { useTranslation } from 'hooks/useTranslation';
+import { EPaths } from 'enums/EPaths';
 
 type Props = {
 	offerId: string;
@@ -40,7 +41,7 @@ const OfferPreview: React.FC<Props> = ({ offerId }) => {
 				</Typography>
 			</CardContent>
 			<CardActions sx={{ justifyContent: 'flex-end' }} disableSpacing>
-				<Link to={`/${offerId}`}>{t('show_more')}</Link>
+				<Link to={EPaths.OFFER.replace(':id', offerId)}>{t('show_more')}</Link>
 			</CardActions>
 		</Card>
 	);
