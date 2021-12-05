@@ -1,7 +1,7 @@
 export enum EEducation {
-	A = 'Bez vzdelania',
-	C = 'Základná + praktická škola',
-	H = 'Stredné odborné (vyučený)',
+	A = 'Bez vzdělání',
+	C = 'Základní + praktická škola',
+	H = 'Střední odborné (vyučen)',
 	K = 'ÚSV',
 	T = 'Vysokoškolské'
 }
