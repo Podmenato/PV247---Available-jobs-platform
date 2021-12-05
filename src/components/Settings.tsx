@@ -1,8 +1,6 @@
-import { VisibilityOff, Visibility, Edit } from '@mui/icons-material';
+import { VisibilityOff, Visibility } from '@mui/icons-material';
 import {
 	Alert,
-	AlertTitle,
-	Box,
 	Button,
 	Container,
 	FormControl,
@@ -14,54 +12,17 @@ import {
 	TextField,
 	Typography
 } from '@mui/material';
-import { setDoc, getDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 
 import useUser from 'hooks/useUser';
-import { changeMail, changePsswd, settingsDocument } from 'utils/firebase';
+import { changeMail, changePsswd } from 'utils/firebase';
 import { useTranslation } from 'hooks/useTranslation';
 
 const Settings = () => {
 	const t = useTranslation();
 	const user = useUser();
-	const [state, setState] = React.useState({
-		firstName: '',
-		lastName: '',
-		education: ''
-	});
 	const [isSuccessShown, setIsSuccessShown] = React.useState(false);
 	const [isErrorShown, setIsErrorShown] = React.useState(false);
-
-	const [isEditingFirstName, setIsEditingFirstName] = React.useState(false);
-	const [isEditingLastName, setIsEditingLastName] = React.useState(false);
-	const [isEditingEducation, setIsEditingEducation] = React.useState(false);
-
-	React.useEffect(() => {
-		const loadAccountInfo = async () => {
-			const response = await getDoc(settingsDocument(user?.email ?? ''));
-
-			if (response.exists()) {
-				const { firstName, lastName, education } = response.data();
-				setState({
-					firstName: firstName ?? '',
-					lastName: lastName ?? '',
-					education: education ?? ''
-				});
-			}
-		};
-
-		loadAccountInfo();
-	}, []);
-
-	const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-		const value = evt.target.value;
-
-		setState({
-			...state,
-
-			[evt.target.id]: value
-		});
-	};
 	const [password, setPassword] = useState<string>();
 	const [passwordRepeated, setPasswordRepeated] = useState<string>();
 	const [passwordTouched, setPasswordTouched] = useState(false);
@@ -105,35 +66,20 @@ const Settings = () => {
 	};
 
 	//submitting
-	const [emptyFieldsError, setEmptyFieldsError] = useState(false);
 	const [submitError, setSubmitError] = useState<string>();
 	const submit = async () => {
 		try {
-			if (
-				state.firstName === '' ||
-				state.lastName === '' ||
-				state.education === ''
-			) {
-				setEmptyFieldsError(true);
-			} else {
-				setEmptyFieldsError(false);
-				if (user?.email) {
-					await setDoc(settingsDocument(user?.email), {
-						firstName: state.firstName,
-						lastName: state.lastName,
-						education: state.education
-					});
-					if (!mailValid) {
-						if (mail) {
-							changeMail(mail);
-						}
-					}
-					if (!passwordsDiffer && password) {
-						changePsswd(password);
+			if (user?.email) {
+				if (!mailValid) {
+					if (mail) {
+						changeMail(mail);
 					}
 				}
-				setIsSuccessShown(true);
+				if (!passwordsDiffer && password) {
+					changePsswd(password);
+				}
 			}
+			setIsSuccessShown(true);
 		} catch (err) {
 			setIsErrorShown(true);
 			setSubmitError(
@@ -142,65 +88,22 @@ const Settings = () => {
 		}
 	};
 
-	console.log(state, 'state');
-
 	return (
 		<Container>
 			<Stack direction="row" spacing={40}>
 				<Stack spacing={2}>
-					<Typography variant="h6">First name</Typography>
-					<Box sx={{ display: 'flex', alignItems: 'center' }}>
-						<TextField
-							sx={{ m: 1, width: '50ch', marginRight: '20px' }}
-							id="firstName"
-							label="First name"
-							variant="outlined"
-							disabled={!isEditingFirstName}
-							value={state.firstName}
-							onChange={handleChange}
-						/>
-						<Edit color="primary" onClick={() => setIsEditingFirstName(true)} />
-					</Box>
-					<Typography variant="h6">Last name</Typography>
-					<Box sx={{ display: 'flex', alignItems: 'center' }}>
-						<TextField
-							sx={{ m: 1, width: '50ch', marginRight: '20px' }}
-							id="lastName"
-							label="Last name"
-							variant="outlined"
-							disabled={!isEditingLastName}
-							value={state.lastName}
-							onChange={handleChange}
-						/>
-						<Edit color="primary" onClick={() => setIsEditingLastName(true)} />
-					</Box>
-					<Typography variant="h6">Education</Typography>
-					<Box
-						sx={{ display: 'flex', alignItems: 'center', marginBottom: '30px' }}
-					>
-						<TextField
-							sx={{ m: 1, width: '50ch', marginRight: '20px' }}
-							id="education"
-							label="Education"
-							variant="outlined"
-							disabled={!isEditingEducation}
-							value={state.education}
-							onChange={handleChange}
-						/>
-						<Edit color="primary" onClick={() => setIsEditingEducation(true)} />
-					</Box>
-					<Typography variant="h6">New mail</Typography>
+					<Typography variant="h6">{t('newMail')}</Typography>
 					<TextField
 						sx={{ m: 1, width: '50ch', marginBottom: '30px' }}
 						id="mail"
-						label="New mail"
+						label={t('newMail')}
 						variant="outlined"
 						error={mailValid}
 						helperText={mailValid ? 'Not a valid email address' : ' '}
 						value={mail}
 						onChange={handleChangeMail}
 					/>
-					<Typography variant="h6">New password</Typography>
+					<Typography variant="h6">{t('newPassword')}</Typography>
 					<FormControl
 						sx={{ m: 1, width: '50ch' }}
 						variant="outlined"
@@ -227,7 +130,7 @@ const Settings = () => {
 									</IconButton>
 								</InputAdornment>
 							}
-							label="New password"
+							label={t('newPassword')}
 						/>
 					</FormControl>
 					<FormControl sx={{ m: 1, width: '50ch' }} variant="outlined">
@@ -261,12 +164,6 @@ const Settings = () => {
 				<Typography variant="subtitle2" align="left" color="error" paragraph>
 					{submitError}
 				</Typography>
-			)}
-			{emptyFieldsError && (
-				<Alert severity="error" sx={{ marginTop: '20px' }}>
-					<AlertTitle>Error</AlertTitle>
-					First name, last name and education can not be empty
-				</Alert>
 			)}
 			{isSuccessShown && (
 				<Alert severity="success" sx={{ marginTop: '20px' }}>

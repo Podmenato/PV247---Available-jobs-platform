@@ -46,5 +46,10 @@ export default {
 	Shift: 'Shift',
 	Worker_Type: 'Worker Type',
 	Work_Relationship: 'Relationship',
-	Salary: 'Salary'
+	Salary: 'Salary',
+	newMail: 'New mail',
+	newPassword: 'New password',
+	passwordsDiffer: 'Passwords differ!',
+	repeatPassword: 'Repeat password',
+	submit: 'Submit'
 };
