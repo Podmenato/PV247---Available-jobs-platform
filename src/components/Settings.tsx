@@ -1,7 +1,8 @@
-import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { VisibilityOff, Visibility, Edit } from '@mui/icons-material';
 import {
 	Alert,
 	AlertTitle,
+	Box,
 	Button,
 	Container,
 	FormControl,
@@ -13,18 +14,45 @@ import {
 	TextField,
 	Typography
 } from '@mui/material';
-import { setDoc } from 'firebase/firestore';
+import { setDoc, getDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 
 import useUser from 'hooks/useUser';
 import { changeMail, changePsswd, settingsDocument } from 'utils/firebase';
+import { useTranslation } from 'hooks/useTranslation';
 
 const Settings = () => {
+	const t = useTranslation();
+	const user = useUser();
 	const [state, setState] = React.useState({
 		firstName: '',
 		lastName: '',
 		education: ''
 	});
+	const [isSuccessShown, setIsSuccessShown] = React.useState(false);
+	const [isErrorShown, setIsErrorShown] = React.useState(false);
+
+	const [isEditingFirstName, setIsEditingFirstName] = React.useState(false);
+	const [isEditingLastName, setIsEditingLastName] = React.useState(false);
+	const [isEditingEducation, setIsEditingEducation] = React.useState(false);
+
+	React.useEffect(() => {
+		const loadAccountInfo = async () => {
+			const response = await getDoc(settingsDocument(user?.email ?? ''));
+
+			if (response.exists()) {
+				const { firstName, lastName, education } = response.data();
+				setState({
+					firstName: firstName ?? '',
+					lastName: lastName ?? '',
+					education: education ?? ''
+				});
+			}
+		};
+
+		loadAccountInfo();
+	}, []);
+
 	const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
 		const value = evt.target.value;
 
@@ -75,17 +103,8 @@ const Settings = () => {
 	const handleMouseDownPassword_2 = (event: { preventDefault: () => void }) => {
 		event.preventDefault();
 	};
-	const test = () => {
-		console.log(
-			state.firstName,
-			state.lastName,
-			state.education,
-			mail,
-			password
-		);
-	};
+
 	//submitting
-	const user = useUser();
 	const [emptyFieldsError, setEmptyFieldsError] = useState(false);
 	const [submitError, setSubmitError] = useState<string>();
 	const submit = async () => {
@@ -105,74 +124,90 @@ const Settings = () => {
 						education: state.education
 					});
 					if (!mailValid) {
-						console.log(mail);
 						if (mail) {
 							changeMail(mail);
 						}
 					}
 					if (!passwordsDiffer && password) {
-						console.log(password);
 						changePsswd(password);
 					}
 				}
+				setIsSuccessShown(true);
 			}
 		} catch (err) {
+			setIsErrorShown(true);
 			setSubmitError(
 				(err as { message?: string })?.message ?? 'Unknown error occurred'
 			);
 		}
 	};
+
+	console.log(state, 'state');
+
 	return (
 		<Container>
 			<Stack direction="row" spacing={40}>
 				<Stack spacing={2}>
 					<Typography variant="h6">First name</Typography>
-					<TextField
-						sx={{ m: 1, width: '50ch' }}
-						id="firstName"
-						label="First name"
-						variant="outlined"
-						value={state.firstName}
-						onChange={handleChange}
-					/>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						<TextField
+							sx={{ m: 1, width: '50ch', marginRight: '20px' }}
+							id="firstName"
+							label="First name"
+							variant="outlined"
+							disabled={!isEditingFirstName}
+							value={state.firstName}
+							onChange={handleChange}
+						/>
+						<Edit color="primary" onClick={() => setIsEditingFirstName(true)} />
+					</Box>
 					<Typography variant="h6">Last name</Typography>
-					<TextField
-						sx={{ m: 1, width: '50ch' }}
-						id="lastName"
-						label="Last name"
-						variant="outlined"
-						value={state.lastName}
-						onChange={handleChange}
-					/>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						<TextField
+							sx={{ m: 1, width: '50ch', marginRight: '20px' }}
+							id="lastName"
+							label="Last name"
+							variant="outlined"
+							disabled={!isEditingLastName}
+							value={state.lastName}
+							onChange={handleChange}
+						/>
+						<Edit color="primary" onClick={() => setIsEditingLastName(true)} />
+					</Box>
 					<Typography variant="h6">Education</Typography>
+					<Box
+						sx={{ display: 'flex', alignItems: 'center', marginBottom: '30px' }}
+					>
+						<TextField
+							sx={{ m: 1, width: '50ch', marginRight: '20px' }}
+							id="education"
+							label="Education"
+							variant="outlined"
+							disabled={!isEditingEducation}
+							value={state.education}
+							onChange={handleChange}
+						/>
+						<Edit color="primary" onClick={() => setIsEditingEducation(true)} />
+					</Box>
+					<Typography variant="h6">New mail</Typography>
 					<TextField
-						sx={{ m: 1, width: '50ch' }}
-						id="education"
-						label="Education"
-						variant="outlined"
-						value={state.education}
-						onChange={handleChange}
-					/>
-					<Typography variant="h6">Mail</Typography>
-					<TextField
-						sx={{ m: 1, width: '50ch' }}
-						required
+						sx={{ m: 1, width: '50ch', marginBottom: '30px' }}
 						id="mail"
-						label="Mail"
+						label="New mail"
 						variant="outlined"
 						error={mailValid}
 						helperText={mailValid ? 'Not a valid email address' : ' '}
 						value={mail}
 						onChange={handleChangeMail}
 					/>
-					<Typography variant="h6">Password</Typography>
+					<Typography variant="h6">New password</Typography>
 					<FormControl
 						sx={{ m: 1, width: '50ch' }}
 						variant="outlined"
 						error={passwordsDiffer}
 					>
 						<InputLabel htmlFor="outlined-adornment-password">
-							{passwordsDiffer ? 'Passwords differ!' : 'Password'}
+							{passwordsDiffer ? 'Passwords differ!' : 'New password'}
 						</InputLabel>
 						<OutlinedInput
 							id="outlined-adornment-password"
@@ -192,15 +227,15 @@ const Settings = () => {
 									</IconButton>
 								</InputAdornment>
 							}
-							label="Password"
+							label="New password"
 						/>
 					</FormControl>
 					<FormControl sx={{ m: 1, width: '50ch' }} variant="outlined">
-						<InputLabel htmlFor="outlined-adornment-password">
-							{passwordsDiffer ? 'Passwords differ!' : 'Password'}
+						<InputLabel htmlFor="outlined-adornment-password-repeated">
+							{passwordsDiffer ? 'Passwords differ!' : 'Repeat password'}
 						</InputLabel>
 						<OutlinedInput
-							id="outlined-adornment-password"
+							id="outlined-adornment-password-repeated"
 							type={showPassword_2 ? 'text' : 'password'}
 							value={passwordRepeated}
 							error={passwordsDiffer}
@@ -217,7 +252,7 @@ const Settings = () => {
 									</IconButton>
 								</InputAdornment>
 							}
-							label="Repeat Password"
+							label="Repeat password"
 						/>
 					</FormControl>
 				</Stack>
@@ -228,12 +263,24 @@ const Settings = () => {
 				</Typography>
 			)}
 			{emptyFieldsError && (
-				<Alert severity="error">
+				<Alert severity="error" sx={{ marginTop: '20px' }}>
 					<AlertTitle>Error</AlertTitle>
 					First name, last name and education can not be empty
 				</Alert>
 			)}
-			<Button onClick={submit}>Submit</Button>
+			{isSuccessShown && (
+				<Alert severity="success" sx={{ marginTop: '20px' }}>
+					{t('profile_updated_success')}
+				</Alert>
+			)}
+			{isErrorShown && (
+				<Alert severity="error" sx={{ marginTop: '20px' }}>
+					{t('profile_updated_error')}
+				</Alert>
+			)}
+			<Button variant="contained" onClick={submit} sx={{ marginTop: '20px' }}>
+				Submit
+			</Button>
 		</Container>
 	);
 };

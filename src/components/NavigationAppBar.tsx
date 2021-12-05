@@ -14,74 +14,82 @@ const NavigationAppBar = () => {
 
 	return (
 		<AppBar position="fixed" sx={{ padding: '0 50px' }}>
-			<Container maxWidth="sm">
-				<Toolbar disableGutters sx={{ gap: 2 }}>
-					<LanguageSwitch />
+			<Toolbar disableGutters sx={{ gap: 2 }}>
+				<LanguageSwitch />
+				<Button
+					variant="text"
+					component={Link}
+					to={EPaths.HOME}
+					sx={{ color: 'white' }}
+				>
+					{t('home')}
+				</Button>
+				<Button
+					variant="text"
+					component={Link}
+					to={EPaths.LIST}
+					sx={{ color: 'white' }}
+				>
+					{t('offers')}
+				</Button>
+				<Button
+					variant="text"
+					component={Link}
+					to={EPaths.TRENDING}
+					sx={{ color: 'white' }}
+				>
+					{t('trending')}
+				</Button>
+				{user && (
 					<Button
 						variant="text"
 						component={Link}
-						to={EPaths.HOME}
+						to={EPaths.FAVORITES}
 						sx={{ color: 'white' }}
 					>
-						{t('home')}
+						{t('favorite_offers')}
 					</Button>
+				)}
+				{user && (
 					<Button
 						variant="text"
 						component={Link}
-						to={EPaths.LIST}
+						to={EPaths.SETTINGS}
 						sx={{ color: 'white' }}
 					>
-						{t('offers')}
+						{t('settings')}
 					</Button>
+				)}
+				{user && (
 					<Button
 						variant="text"
 						component={Link}
-						to={EPaths.TRENDING}
+						to={EPaths.PERSONALIZED}
 						sx={{ color: 'white' }}
 					>
-						{t('trending')}
+						{t('personalized')}
 					</Button>
-					{user && (
-						<Button
-							variant="text"
-							component={Link}
-							to={EPaths.FAVORITES}
-							sx={{ color: 'white' }}
-						>
-							{t('favorite_offers')}
-						</Button>
-					)}
-					{user && (
-						<Button
-							variant="text"
-							component={Link}
-							to={EPaths.SETTINGS}
-							sx={{ color: 'white' }}
-						>
-							{t('settings')}
-						</Button>
-					)}
-					{!user && (
-						<Button
-							variant="text"
-							component={Link}
-							to={EPaths.LOGIN}
-							sx={{ color: 'white', marginLeft: 'auto' }}
-						>
-							{t('login')}
-						</Button>
-					)}
-					{user && (
-						<Button
-							variant="text"
-							onClick={signOut}
-							sx={{ color: 'white', marginLeft: 'auto' }}
-						>
-							{t('logout')}
-						</Button>
-					)}
-				</Toolbar>
-			</Container>
+				)}
+				{!user && (
+					<Button
+						variant="text"
+						component={Link}
+						to={EPaths.LOGIN}
+						sx={{ color: 'white', marginLeft: 'auto' }}
+					>
+						{t('login')}
+					</Button>
+				)}
+				{user && (
+					<Button
+						variant="text"
+						onClick={signOut}
+						sx={{ color: 'white', marginLeft: 'auto' }}
+					>
+						{t('logout')}
+					</Button>
+				)}
+			</Toolbar>
 		</AppBar>
 	);
 };
