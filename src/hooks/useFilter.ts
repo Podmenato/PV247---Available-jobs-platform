@@ -50,8 +50,12 @@ const educationCheck = (offer: IJobOffer, params: ISearchParams) =>
 	(offer.MIN_VZDELANI.nazev === EEducation.H && params.education.H) ||
 	(offer.MIN_VZDELANI.nazev === EEducation.K && params.education.K);
 
-export const useFilter = (offers: IJobOffer[], params: ISearchParams) =>
-	offers.filter(
+export const useFilter = (
+	offers: IJobOffer[],
+	params: ISearchParams | null
+) => {
+	if (!params) return offers;
+	return offers.filter(
 		offer =>
 			suitableCheck(offer, params) &&
 			languageCheck(offer, params) &&
@@ -60,3 +64,4 @@ export const useFilter = (offers: IJobOffer[], params: ISearchParams) =>
 			educationCheck(offer, params) &&
 			shiftCheck(offer, params)
 	);
+};
