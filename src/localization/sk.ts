@@ -33,5 +33,15 @@ export default {
 	no_title: 'Bez názvu',
 	no_description: 'Bez popisu',
 	apply_filter: 'Aplikovať filter',
-	offers: 'Ponuky'
+	offers: 'Ponuky',
+	finish: 'Dokončiť',
+	next: 'Ďalšie',
+	back: 'Späť',
+	Education: 'Vzdelanie',
+	Field: 'Obor',
+	Language: 'Jazyk',
+	Shift: 'Smeny',
+	Worker_Type: 'Vhodné pre',
+	Work_Relationship: 'Vzťah',
+	Salary: 'Mzda'
 };

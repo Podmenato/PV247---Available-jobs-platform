@@ -6,6 +6,7 @@ import { EPaths } from 'enums/EPaths';
 import { signOut } from 'utils/firebase';
 import { useTranslation } from 'hooks/useTranslation';
 import useUser from 'hooks/useUser';
+import LanguageSwitch from 'components/LanguageSwitch';
 
 const NavigationAppBar = () => {
 	const t = useTranslation();
@@ -15,6 +16,7 @@ const NavigationAppBar = () => {
 		<AppBar position="fixed" sx={{ padding: '0 50px' }}>
 			<Container maxWidth="sm">
 				<Toolbar disableGutters sx={{ gap: 2 }}>
+					<LanguageSwitch />
 					<Button
 						variant="text"
 						component={Link}

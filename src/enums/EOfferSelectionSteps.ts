@@ -13,8 +13,8 @@ export const StepsNames = [
 	'Field',
 	'Language',
 	'Shift',
-	'Worker Type',
-	'Work Relationship',
+	'Worker_Type',
+	'Work_Relationship',
 	'Salary'
 ];
 

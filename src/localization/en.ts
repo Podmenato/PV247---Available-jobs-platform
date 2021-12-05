@@ -33,5 +33,15 @@ export default {
 	no_title: 'No job title',
 	no_description: 'No description',
 	apply_filter: 'Apply filter',
-	offers: 'Offers'
+	offers: 'Offers',
+	finish: 'Finish',
+	next: 'Next',
+	back: 'Back',
+	Education: 'Education',
+	Field: 'Field',
+	Language: 'Language',
+	Shift: 'Shift',
+	Worker_Type: 'Worker Type',
+	Work_Relationship: 'Relationship',
+	Salary: 'Salary'
 };
