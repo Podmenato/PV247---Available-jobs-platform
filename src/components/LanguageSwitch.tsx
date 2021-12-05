@@ -1,5 +1,6 @@
 import React from 'react';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import Flags from 'country-flag-icons/react/3x2';
 
 import { ELanguage } from 'enums/ELanguage';
 import { useLanguage } from 'hooks/useTranslation';
@@ -7,34 +8,39 @@ import { useLanguage } from 'hooks/useTranslation';
 const LanguageSwitch = () => {
 	const [language, setLanguage] = useLanguage();
 
-	const handleAlignment = (
-		_event: React.MouseEvent<HTMLElement>,
-		newAlignment: ELanguage | null
-	) => {
-		setLanguage(newAlignment ?? ELanguage.EN);
-	};
 	return (
-		<ToggleButtonGroup
-			value={language}
-			exclusive
-			onChange={handleAlignment}
-			aria-label="language switch"
-		>
-			<ToggleButton
-				sx={{ borderRadius: 11 }}
-				value={ELanguage.SK}
-				aria-label="left aligned"
+		<div style={{ display: 'inline-block' }}>
+			<Button
+				sx={{
+					'minWidth': '25px',
+					' svg': {
+						width: '25px',
+						filter: language === 'en' ? 'none' : 'sepia(100%)'
+					},
+					':hover svg': {
+						filter: 'none'
+					}
+				}}
+				onClick={() => setLanguage('en')}
 			>
-				SK
-			</ToggleButton>
-			<ToggleButton
-				sx={{ borderRadius: 11 }}
-				value={ELanguage.EN}
-				aria-label="centered"
+				<Flags.US title="English" />
+			</Button>
+			<Button
+				sx={{
+					'minWidth': '25px',
+					' svg': {
+						width: '25px',
+						filter: language === 'sk' ? 'none' : 'sepia(100%)'
+					},
+					':hover svg': {
+						filter: 'none'
+					}
+				}}
+				onClick={() => setLanguage('sk')}
 			>
-				EN
-			</ToggleButton>
-		</ToggleButtonGroup>
+				<Flags.SK title="Slovak" />
+			</Button>
+		</div>
 	);
 };
 
