@@ -35,9 +35,9 @@ export default {
 	apply_filter: 'Apply filter',
 	profile_updated_success: 'Profile information updated successfully.',
 	profile_updated_error: 'Error occured while profile information update.',
-	personalized: 'My filter'
-	apply_filter: 'Apply filter',
+	personalized: 'My filter',
 	offers: 'Offers',
+	apply_filter: 'Apply filter',
 	finish: 'Finish',
 	next: 'Next',
 	back: 'Back',

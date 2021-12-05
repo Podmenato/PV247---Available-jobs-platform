@@ -36,7 +36,7 @@ export default {
 	profile_updated_success: 'Profilové informácie úspečne aktualizované.',
 	profile_updated_error:
 		'Počas aktualizovania profilových informácií nastala chyba.',
-	personalized: 'Môj filter'
+	personalized: 'Môj filter',
 	apply_filter: 'Aplikovať filter',
 	offers: 'Ponuky',
 	finish: 'Dokončiť',
