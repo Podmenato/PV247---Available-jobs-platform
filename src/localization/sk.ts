@@ -47,5 +47,6 @@ export default {
 	Shift: 'Smeny',
 	Worker_Type: 'Vhodné pre',
 	Work_Relationship: 'Vzťah',
-	Salary: 'Mzda'
+	Salary: 'Mzda',
+	save: 'Uložiť'
 };

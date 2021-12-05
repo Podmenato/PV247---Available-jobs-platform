@@ -43,13 +43,7 @@ const PersonalizedProfile = () => {
 			[evt.target.id]: value
 		});
 	};
-	const test = () => {
-		console.log(workRelationship);
-		console.log(state.startingFrom);
-		console.log(state.salary);
-		console.log(state.profession);
-		console.log(state.city);
-	};
+
 	const user = useUser();
 	const [emptyFieldsError, setEmptyFieldsError] = useState(false);
 	const [submitError, setSubmitError] = useState<string>();
