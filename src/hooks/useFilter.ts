@@ -14,6 +14,7 @@ const suitableCheck = (offer: IJobOffer, params: ISearchParams) =>
 	(offer.VHODNE_PRO.ozp && params.worker_type.ozp);
 
 const shiftCheck = (offer: IJobOffer, params: ISearchParams) =>
+	offer.SMENNOST === null ||
 	(offer.SMENNOST.nazev === EShifts.FLEX && params.shifts.FLEX) ||
 	(offer.SMENNOST.nazev === EShifts.ONE && params.shifts.ONE) ||
 	(offer.SMENNOST.nazev === EShifts.TWO && params.shifts.TWO) ||
@@ -21,9 +22,9 @@ const shiftCheck = (offer: IJobOffer, params: ISearchParams) =>
 
 const languageCheck = (offer: IJobOffer, params: ISearchParams) =>
 	offer.JAZYK === null ||
-	(offer.JAZYK.kod === EWorkLanguage.ENG && params.language.ENG) ||
-	(offer.JAZYK.kod === EWorkLanguage.RUS && params.language.RUS) ||
-	(offer.JAZYK.kod === EWorkLanguage.SPA && params.language.SPA);
+	(offer.JAZYK.nazev === EWorkLanguage.ENG && params.language.ENG) ||
+	(offer.JAZYK.nazev === EWorkLanguage.RUS && params.language.RUS) ||
+	(offer.JAZYK.nazev === EWorkLanguage.SPA && params.language.SPA);
 
 const workRelationshipCheck = (offer: IJobOffer, params: ISearchParams) =>
 	(offer.PRACPRAVNI_VZTAH.ppvztahDpc === 'A' && params.relationship.DPC) ||
@@ -33,6 +34,7 @@ const workRelationshipCheck = (offer: IJobOffer, params: ISearchParams) =>
 	(offer.PRACPRAVNI_VZTAH.ppvztahSp === 'A' && params.relationship.SP);
 
 const fieldCheck = (offer: IJobOffer, params: ISearchParams) =>
+	offer.OBOR.nazev === undefined ||
 	(offer.OBOR.nazev === EField.DEFENCE && params.field.DEFENCE) ||
 	(offer.OBOR.nazev === EField.FACTORY && params.field.FACTORY) ||
 	(offer.OBOR.nazev === EField.HEALTHCARE && params.field.HEALTHCARE) ||

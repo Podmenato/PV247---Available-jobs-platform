@@ -2,13 +2,13 @@ import * as React from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
-import useOffers from 'hooks/useOffers';
 import OfferPreview from 'components/OfferPreview';
-import useUser from 'hooks/useUser';
 import Filter from 'components/filter/Filter';
 import { useTranslation } from 'hooks/useTranslation';
 import { filledParams, ISearchParams } from 'interfaces/ISearchParams';
 import { useFilter } from 'hooks/useFilter';
+import useOffers from 'hooks/useOffers';
+import useUser from 'hooks/useUser';
 
 const Home: React.FC = () => {
 	const t = useTranslation();
