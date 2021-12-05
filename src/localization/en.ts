@@ -46,5 +46,6 @@ export default {
 	Shift: 'Shift',
 	Worker_Type: 'Worker Type',
 	Work_Relationship: 'Relationship',
-	Salary: 'Salary'
+	Salary: 'Salary',
+	save: 'Save'
 };
