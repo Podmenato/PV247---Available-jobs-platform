@@ -46,8 +46,13 @@ export default {
 	Language: 'Jazyk',
 	Shift: 'Smeny',
 	Worker_Type: 'Vhodné pre',
-	Work_Relationship: 'Pracovný úväzok',
 	Salary: 'Mzda',
+	newMail: 'Nový mail',
+	newPassword: 'Nové heslo',
+	passwordsDiffer: 'Heslá sa líšia!',
+	repeatPassword: 'Zopakujte heslo',
+	submit: 'Odoslať',
+	Work_Relationship: 'Pracovný úväzok',
 	hello: 'Dobrý deň',
 	save: 'Uložiť'
 };
