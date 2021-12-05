@@ -110,7 +110,7 @@ const Settings = () => {
 						error={passwordsDiffer}
 					>
 						<InputLabel htmlFor="outlined-adornment-password">
-							{passwordsDiffer ? 'Passwords differ!' : 'New password'}
+							{passwordsDiffer ? t('passwordsDiffer') : t('newPassword')}
 						</InputLabel>
 						<OutlinedInput
 							id="outlined-adornment-password"
@@ -135,7 +135,7 @@ const Settings = () => {
 					</FormControl>
 					<FormControl sx={{ m: 1, width: '50ch' }} variant="outlined">
 						<InputLabel htmlFor="outlined-adornment-password-repeated">
-							{passwordsDiffer ? 'Passwords differ!' : 'Repeat password'}
+							{passwordsDiffer ? t('passwordsDiffer') : t('repeatPassword')}
 						</InputLabel>
 						<OutlinedInput
 							id="outlined-adornment-password-repeated"
@@ -155,7 +155,7 @@ const Settings = () => {
 									</IconButton>
 								</InputAdornment>
 							}
-							label="Repeat password"
+							label={t('repeatPassword')}
 						/>
 					</FormControl>
 				</Stack>
@@ -176,7 +176,7 @@ const Settings = () => {
 				</Alert>
 			)}
 			<Button variant="contained" onClick={submit} sx={{ marginTop: '20px' }}>
-				Submit
+				{t('submit')}
 			</Button>
 		</Container>
 	);
