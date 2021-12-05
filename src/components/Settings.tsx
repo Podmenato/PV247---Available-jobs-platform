@@ -18,13 +18,18 @@ import React, { useState } from 'react';
 
 import useUser from 'hooks/useUser';
 import { changeMail, changePsswd, settingsDocument } from 'utils/firebase';
+import { useTranslation } from 'hooks/useTranslation';
 
 const Settings = () => {
+	const t = useTranslation();
 	const [state, setState] = React.useState({
 		firstName: '',
 		lastName: '',
 		education: ''
 	});
+	const [isSuccessShown, setIsSuccessShown] = React.useState(false);
+	const [isErrorShown, setIsErrorShown] = React.useState(false);
+
 	const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
 		const value = evt.target.value;
 
@@ -75,15 +80,7 @@ const Settings = () => {
 	const handleMouseDownPassword_2 = (event: { preventDefault: () => void }) => {
 		event.preventDefault();
 	};
-	const test = () => {
-		console.log(
-			state.firstName,
-			state.lastName,
-			state.education,
-			mail,
-			password
-		);
-	};
+
 	//submitting
 	const user = useUser();
 	const [emptyFieldsError, setEmptyFieldsError] = useState(false);
@@ -105,18 +102,18 @@ const Settings = () => {
 						education: state.education
 					});
 					if (!mailValid) {
-						console.log(mail);
 						if (mail) {
 							changeMail(mail);
 						}
 					}
 					if (!passwordsDiffer && password) {
-						console.log(password);
 						changePsswd(password);
 					}
 				}
+				setIsSuccessShown(true);
 			}
 		} catch (err) {
+			setIsErrorShown(true);
 			setSubmitError(
 				(err as { message?: string })?.message ?? 'Unknown error occurred'
 			);
@@ -165,14 +162,14 @@ const Settings = () => {
 						value={mail}
 						onChange={handleChangeMail}
 					/>
-					<Typography variant="h6">Password</Typography>
+					<Typography variant="h6">New password</Typography>
 					<FormControl
 						sx={{ m: 1, width: '50ch' }}
 						variant="outlined"
 						error={passwordsDiffer}
 					>
 						<InputLabel htmlFor="outlined-adornment-password">
-							{passwordsDiffer ? 'Passwords differ!' : 'Password'}
+							{passwordsDiffer ? 'Passwords differ!' : 'New password'}
 						</InputLabel>
 						<OutlinedInput
 							id="outlined-adornment-password"
@@ -192,12 +189,12 @@ const Settings = () => {
 									</IconButton>
 								</InputAdornment>
 							}
-							label="Password"
+							label="New password"
 						/>
 					</FormControl>
 					<FormControl sx={{ m: 1, width: '50ch' }} variant="outlined">
 						<InputLabel htmlFor="outlined-adornment-password">
-							{passwordsDiffer ? 'Passwords differ!' : 'Password'}
+							{passwordsDiffer ? 'Passwords differ!' : 'Repeat password'}
 						</InputLabel>
 						<OutlinedInput
 							id="outlined-adornment-password"
@@ -217,7 +214,7 @@ const Settings = () => {
 									</IconButton>
 								</InputAdornment>
 							}
-							label="Repeat Password"
+							label="Repeat password"
 						/>
 					</FormControl>
 				</Stack>
@@ -228,12 +225,24 @@ const Settings = () => {
 				</Typography>
 			)}
 			{emptyFieldsError && (
-				<Alert severity="error">
+				<Alert severity="error" sx={{ marginTop: '20px' }}>
 					<AlertTitle>Error</AlertTitle>
 					First name, last name and education can not be empty
 				</Alert>
 			)}
-			<Button onClick={submit}>Submit</Button>
+			{isSuccessShown && (
+				<Alert severity="success" sx={{ marginTop: '20px' }}>
+					{t('profile_updated_success')}
+				</Alert>
+			)}
+			{isErrorShown && (
+				<Alert severity="error" sx={{ marginTop: '20px' }}>
+					{t('profile_updated_error')}
+				</Alert>
+			)}
+			<Button onClick={submit} sx={{ marginTop: '20px' }}>
+				Submit
+			</Button>
 		</Container>
 	);
 };
