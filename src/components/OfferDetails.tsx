@@ -38,9 +38,6 @@ const OfferDetails: React.FC<Props> = ({ jobParams, offerId }) => {
 			<Card sx={{ padding: '1em' }}>
 				<CardActions sx={{ justifyContent: 'flex-end' }}>
 					<div>
-						<IconButton onClick={() => alert('share')}>
-							<ShareOutlined />
-						</IconButton>
 						<FavoriteButton offerId={offerId} />
 					</div>
 				</CardActions>

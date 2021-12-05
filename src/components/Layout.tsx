@@ -5,6 +5,7 @@ import NavigationDrawer from 'components/NavigationDrawer';
 import { usePlatform } from 'hooks/usePlatform';
 import { EPlatform } from 'enums/EPlatform';
 import NavigationAppBar from 'components/NavigationAppBar';
+import Footer from 'components/Footer';
 
 const Layout: React.FC = ({ children }) => {
 	const platform = usePlatform();
@@ -20,7 +21,7 @@ const Layout: React.FC = ({ children }) => {
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
-					minHeight: '100vh',
+					minHeight: '90vh',
 					pt: 8,
 					gap: 2,
 					padding: '100px 30px'
@@ -28,6 +29,7 @@ const Layout: React.FC = ({ children }) => {
 			>
 				{children}
 			</Container>
+			<Footer />
 		</>
 	);
 };
