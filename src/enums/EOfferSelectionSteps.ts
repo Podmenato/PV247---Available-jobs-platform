@@ -14,8 +14,7 @@ export const StepsNames = [
 	'Language',
 	'Shift',
 	'Worker_Type',
-	'Work_Relationship',
-	'Salary'
+	'Work_Relationship'
 ];
 
 export const toString = (step: EOfferSelectionSteps) => {

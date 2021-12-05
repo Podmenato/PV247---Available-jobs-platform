@@ -53,5 +53,7 @@ export default {
 	Work_Relationship: 'Work Relationship',
 	Salary: 'Salary',
 	hello: 'Hello',
-	save: 'Save'
+	save: 'Save',
+	filter_success: 'Default filter updated successfully.',
+	filter_error: 'Error occured while default filter update.'
 };

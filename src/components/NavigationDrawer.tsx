@@ -47,9 +47,6 @@ const NavigationDrawer = () => {
 				<ListItem component={Link} to={EPaths.HOME}>
 					<ListItemText primary={t('home')} />
 				</ListItem>
-				<ListItem component={Link} to={EPaths.LIST}>
-					<ListItemText primary={t('offers')} />
-				</ListItem>
 				<ListItem component={Link} to={EPaths.TRENDING}>
 					<ListItemText primary={t('trending')} />
 				</ListItem>

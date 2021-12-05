@@ -10,16 +10,13 @@ import {
 	updatePassword
 } from 'firebase/auth';
 import {
-	addDoc,
 	collection,
 	CollectionReference,
 	doc,
 	DocumentReference,
-	getDoc,
 	getFirestore,
 	setDoc
 } from 'firebase/firestore';
-import { onSnapshot } from '@firebase/firestore';
 
 import { ISearchParams } from 'interfaces/ISearchParams';
 
@@ -127,9 +124,9 @@ export const myFilterCollection = collection(
 	'my-filter'
 ) as CollectionReference<ISearchParams>;
 
-export const myFilterDocument = () =>
-	doc(db, 'my-filter') as DocumentReference<ISearchParams>;
+export const myFilterDocument = (userId: string) =>
+	doc(db, 'my-filter', userId) as DocumentReference<ISearchParams>;
 
-export const setFilter = async (params: ISearchParams) => {
-	setDoc(doc(db, 'my-filter', 'ID'), params);
+export const setFilter = async (userId: string, params: ISearchParams) => {
+	setDoc(doc(db, 'my-filter', userId), params);
 };

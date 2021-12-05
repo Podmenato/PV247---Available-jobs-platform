@@ -54,5 +54,7 @@ export default {
 	submit: 'Odoslať',
 	Work_Relationship: 'Pracovný úväzok',
 	hello: 'Dobrý deň',
-	save: 'Uložiť'
+	save: 'Uložiť',
+	filter_success: 'Filter úspešne aktualizovaný.',
+	filter_error: 'Počas aktualizovania filtru nastala chyba.'
 };

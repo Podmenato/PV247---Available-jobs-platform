@@ -19,7 +19,6 @@ const NavigationAppBar = () => {
 			<Toolbar disableGutters sx={{ gap: 2 }}>
 				<LanguageSwitch />
 				<NavigationButton path={EPaths.HOME} text={t('home')} />
-				<NavigationButton path={EPaths.LIST} text={t('offers')} />
 				<NavigationButton path={EPaths.TRENDING} text={t('trending')} />
 				{user && (
 					<NavigationButton
