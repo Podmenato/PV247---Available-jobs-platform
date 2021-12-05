@@ -53,9 +53,21 @@ const NavigationDrawer = () => {
 				<ListItem component={Link} to={EPaths.TRENDING}>
 					<ListItemText primary={t('trending')} />
 				</ListItem>
-				<ListItem component={Link} to={EPaths.SETTINGS}>
-					<ListItemText primary={t('settings')} />
-				</ListItem>
+				{user && (
+					<ListItem component={Link} to={EPaths.FAVORITES}>
+						<ListItemText primary={t('favorite_offers')} />
+					</ListItem>
+				)}
+				{user && (
+					<ListItem component={Link} to={EPaths.SETTINGS}>
+						<ListItemText primary={t('settings')} />
+					</ListItem>
+				)}
+				{user && (
+					<ListItem component={Link} to={EPaths.PERSONALIZED}>
+						<ListItemText primary={t('personalized')} />
+					</ListItem>
+				)}
 				<Divider />
 				{!user && (
 					<ListItem component={Link} to={EPaths.LOGIN}>
