@@ -59,7 +59,7 @@ const OfferSelectionStepper = () => {
 					</Box>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Box sx={{ flex: '1 1 auto' }} />
-						<Button onClick={handleSearch}>Search</Button>
+						<Button onClick={handleSearch}>{t('search')}</Button>
 					</Box>
 				</>
 			) : (
