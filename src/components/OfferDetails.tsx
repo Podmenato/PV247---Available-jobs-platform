@@ -5,14 +5,12 @@ import {
 	Card,
 	CardActions,
 	CardContent,
-	IconButton,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText
 } from '@mui/material';
 import {
-	ShareOutlined,
 	AttachMoney,
 	AccessTime,
 	School,

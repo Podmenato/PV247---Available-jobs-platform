@@ -1,6 +1,5 @@
 import React from 'react';
-import { AppBar, Button, Container, styled, Toolbar } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { AppBar, Toolbar } from '@mui/material';
 
 import { EPaths } from 'enums/EPaths';
 import { signOut } from 'utils/firebase';
