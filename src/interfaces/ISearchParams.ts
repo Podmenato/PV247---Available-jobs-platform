@@ -44,7 +44,7 @@ export type ISearchParams = {
 	salary: number;
 };
 
-export const HOME_EMPTY_PARAMS = {
+export const filledParams = {
 	education: {
 		A: true,
 		C: true,
@@ -132,52 +132,6 @@ export const emptyParams = {
 		SP: false,
 		DPP: false,
 		DPC: false
-	},
-	salary: 0
-};
-
-export const filledParams = {
-	education: {
-		A: true,
-		C: true,
-		H: true,
-		K: true,
-		T: true
-	},
-	field: {
-		SERVICES: true,
-		FACTORY: true,
-		HEALTHCARE: true,
-		IT: true,
-		DEFENCE: true,
-		TRAFFIC: true,
-		MONEY: true
-	},
-	shifts: {
-		ONE: true,
-		TWO: true,
-		FLEX: true,
-		TURNUS: true
-	},
-	worker_type: {
-		HIGH_SHOOL_GRADUATE: true,
-		COLLEGE_GRADUATE: true,
-		AZYLANT: true,
-		WHEELCHAIR: true,
-		FOREIGNER: true,
-		OZP: true
-	},
-	language: {
-		ENG: true,
-		RUS: true,
-		SPA: true
-	},
-	relationship: {
-		FULL: true,
-		PART: true,
-		SP: true,
-		DPP: true,
-		DPC: true
 	},
 	salary: 0
 };
