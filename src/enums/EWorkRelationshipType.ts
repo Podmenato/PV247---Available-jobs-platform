@@ -1,9 +1,9 @@
 export enum EWorkRelationshipType {
-	FULL = 'ppvztahPpPlny',
-	PART = 'ppvztahPpZkrac',
-	SP = 'ppvztahSp',
-	DPP = 'ppvztahDpp',
-	DPC = 'ppvztahDpc'
+	FULL = 'Plný úväzok',
+	PART = 'Skrátený úväzok',
+	SP = 'SP',
+	DPP = 'DPP',
+	DPC = 'DPČ'
 }
 
 export const ALL_RELATIONSHIP_TYPES = Object.values(EWorkRelationshipType);

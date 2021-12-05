@@ -22,12 +22,12 @@ export type ISearchParams = {
 		TURNUS: boolean;
 	};
 	worker_type: {
-		HIGH_SHOOL_GRADUATE: boolean;
-		COLLEGE_GRADUATE: boolean;
-		AZYLANT: boolean;
-		WHEELCHAIR: boolean;
-		FOREIGNER: boolean;
-		OZP: boolean;
+		absolventySs: boolean;
+		absolventyVs: boolean;
+		azylanty: boolean;
+		bezbar: boolean;
+		cizince: boolean;
+		ozp: boolean;
 	};
 	language: {
 		ENG: boolean;
@@ -42,6 +42,52 @@ export type ISearchParams = {
 		DPC: boolean;
 	};
 	salary: number;
+};
+
+export const HOME_EMPTY_PARAMS = {
+	education: {
+		A: true,
+		C: true,
+		H: true,
+		K: true,
+		T: true
+	},
+	field: {
+		SERVICES: true,
+		FACTORY: true,
+		HEALTHCARE: true,
+		IT: true,
+		DEFENCE: true,
+		TRAFFIC: true,
+		MONEY: true
+	},
+	shifts: {
+		ONE: true,
+		TWO: true,
+		FLEX: true,
+		TURNUS: true
+	},
+	worker_type: {
+		absolventySs: true,
+		absolventyVs: true,
+		azylanty: true,
+		bezbar: true,
+		cizince: true,
+		ozp: true
+	},
+	language: {
+		ENG: true,
+		RUS: true,
+		SPA: true
+	},
+	relationship: {
+		FULL: true,
+		PART: true,
+		SP: true,
+		DPP: true,
+		DPC: true
+	},
+	salary: 0
 };
 
 export const emptyParams = {
@@ -68,12 +114,12 @@ export const emptyParams = {
 		TURNUS: false
 	},
 	worker_type: {
-		HIGH_SHOOL_GRADUATE: false,
-		COLLEGE_GRADUATE: false,
-		AZYLANT: false,
-		WHEELCHAIR: false,
-		FOREIGNER: false,
-		OZP: false
+		absolventySs: false,
+		absolventyVs: false,
+		azylanty: false,
+		bezbar: false,
+		cizince: false,
+		ozp: false
 	},
 	language: {
 		ENG: false,

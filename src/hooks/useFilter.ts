@@ -6,14 +6,12 @@ import { EField } from 'enums/EField';
 import { EEducation } from 'enums/EEducation';
 
 const suitableCheck = (offer: IJobOffer, params: ISearchParams) =>
-	(offer.VHODNE_PRO.absolventySs === 'A' &&
-		params.worker_type.HIGH_SHOOL_GRADUATE) ||
-	(offer.VHODNE_PRO.absolventyVs === 'A' &&
-		params.worker_type.COLLEGE_GRADUATE) ||
-	(offer.VHODNE_PRO.azylanty === 'A' && params.worker_type.AZYLANT) ||
-	(offer.VHODNE_PRO.bezbar === 'A' && params.worker_type.WHEELCHAIR) ||
-	(offer.VHODNE_PRO.cizince === 'A' && params.worker_type.FOREIGNER) ||
-	(offer.VHODNE_PRO.ozp && params.worker_type.OZP);
+	(offer.VHODNE_PRO.absolventySs === 'A' && params.worker_type.absolventySs) ||
+	(offer.VHODNE_PRO.absolventyVs === 'A' && params.worker_type.absolventyVs) ||
+	(offer.VHODNE_PRO.azylanty === 'A' && params.worker_type.azylanty) ||
+	(offer.VHODNE_PRO.bezbar === 'A' && params.worker_type.bezbar) ||
+	(offer.VHODNE_PRO.cizince === 'A' && params.worker_type.cizince) ||
+	(offer.VHODNE_PRO.ozp && params.worker_type.ozp);
 
 const shiftCheck = (offer: IJobOffer, params: ISearchParams) =>
 	(offer.SMENNOST.nazev === EShifts.FLEX && params.shifts.FLEX) ||

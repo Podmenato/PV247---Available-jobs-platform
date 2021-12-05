@@ -46,7 +46,8 @@ export default {
 	Language: 'Jazyk',
 	Shift: 'Smeny',
 	Worker_Type: 'Vhodné pre',
-	Work_Relationship: 'Vzťah',
+	Work_Relationship: 'Pracovný úväzok',
 	Salary: 'Mzda',
+	hello: 'Dobrý deň',
 	save: 'Uložiť'
 };
