@@ -2,23 +2,15 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
 	DataGrid,
-	GridCallbackDetails,
 	GridColDef,
-	GridEventListener,
-	GridEvents,
-	GridRow,
 	GridRowModel,
 	GridRowParams,
-	GridToolbar,
-	MuiEvent,
-	useGridApiEventHandler,
-	useGridApiRef
+	GridToolbar
 } from '@mui/x-data-grid';
 
 import useOffers from 'hooks/useOffers';
 import { useFilter } from 'hooks/useFilter';
 import { IJobOffer } from 'interfaces/IJobOffer';
-import { EPaths } from 'enums/EPaths';
 
 const OffersList = () => {
 	const location = useLocation();
