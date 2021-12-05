@@ -26,7 +26,9 @@ const Home: React.FC = () => {
 
 	return (
 		<>
-			<Typography variant="h4">{`${t('hello')}, ${user?.email}!`}</Typography>
+			{user && (
+				<Typography variant="h4">{`${t('hello')}, ${user?.email}!`}</Typography>
+			)}
 			<Paper sx={{ width: '100%', padding: 2 }}>
 				<Box
 					onClick={onToggleFilter}

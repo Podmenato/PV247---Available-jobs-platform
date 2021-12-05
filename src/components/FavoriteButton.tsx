@@ -54,7 +54,7 @@ const FavoriteButton: React.FC<Props> = ({ offerId }) => {
 		}
 	};
 
-	return (
+	return user ? (
 		<IconButton onClick={handleFavorite}>
 			{favoriteId ? (
 				<Star sx={{ color: 'star' }} />
@@ -62,6 +62,8 @@ const FavoriteButton: React.FC<Props> = ({ offerId }) => {
 				<StarOutline sx={{ color: 'star' }} />
 			)}
 		</IconButton>
+	) : (
+		<div />
 	);
 };
 
