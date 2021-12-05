@@ -45,11 +45,13 @@ export default {
 	Language: 'Language',
 	Shift: 'Shift',
 	Worker_Type: 'Worker Type',
-	Work_Relationship: 'Relationship',
-	Salary: 'Salary',
 	newMail: 'New mail',
 	newPassword: 'New password',
 	passwordsDiffer: 'Passwords differ!',
 	repeatPassword: 'Repeat password',
-	submit: 'Submit'
+	submit: 'Submit',
+	Work_Relationship: 'Work Relationship',
+	Salary: 'Salary',
+	hello: 'Hello',
+	save: 'Save'
 };

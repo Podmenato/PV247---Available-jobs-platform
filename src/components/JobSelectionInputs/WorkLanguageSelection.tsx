@@ -3,6 +3,7 @@ import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 
 import { ISearchParams } from 'interfaces/ISearchParams';
 import { ALL_LANGUAGES, EWorkLanguage } from 'enums/EWorkLanguage';
+import { isLanguageChecked } from 'utils/params';
 
 type TProps = {
 	params: ISearchParams;
@@ -36,19 +37,6 @@ const WorkLanguageSelection: FC<TProps> = ({ params, setParams }) => {
 		}
 	};
 
-	const isChecked = (label: EWorkLanguage) => {
-		switch (label) {
-			case EWorkLanguage.SPA:
-				return params.language.SPA;
-			case EWorkLanguage.RUS:
-				return params.language.RUS;
-			case EWorkLanguage.ENG:
-				return params.language.ENG;
-			default: {
-				return false;
-			}
-		}
-	};
 	return (
 		<FormGroup>
 			{ALL_LANGUAGES.map(label => (
@@ -56,7 +44,7 @@ const WorkLanguageSelection: FC<TProps> = ({ params, setParams }) => {
 					key={label}
 					control={
 						<Checkbox
-							checked={isChecked(label)}
+							checked={isLanguageChecked(params, label)}
 							onChange={event => handleChange(event, label)}
 						/>
 					}

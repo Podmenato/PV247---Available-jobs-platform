@@ -3,6 +3,7 @@ import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 
 import { ISearchParams } from 'interfaces/ISearchParams';
 import { ALL_SHIFTS, EShifts } from 'enums/EShifts';
+import { isShiftChecked } from 'utils/params';
 
 type TProps = {
 	params: ISearchParams;
@@ -41,21 +42,6 @@ const ShiftsSelection: FC<TProps> = ({ params, setParams }) => {
 		}
 	};
 
-	const isChecked = (label: EShifts) => {
-		switch (label) {
-			case EShifts.TWO:
-				return params.shifts.TWO;
-			case EShifts.TURNUS:
-				return params.shifts.TURNUS;
-			case EShifts.ONE:
-				return params.shifts.ONE;
-			case EShifts.FLEX:
-				return params.shifts.FLEX;
-			default: {
-				return false;
-			}
-		}
-	};
 	return (
 		<FormGroup>
 			{ALL_SHIFTS.map(label => (
@@ -63,7 +49,7 @@ const ShiftsSelection: FC<TProps> = ({ params, setParams }) => {
 					key={label}
 					control={
 						<Checkbox
-							checked={isChecked(label)}
+							checked={isShiftChecked(params, label)}
 							onChange={event => handleChange(event, label)}
 						/>
 					}

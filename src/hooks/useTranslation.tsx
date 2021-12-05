@@ -18,7 +18,7 @@ type LanguageState = [Languages, Dispatch<SetStateAction<Languages>>];
 const LanguageContext = createContext<LanguageState>(undefined as never);
 
 export const LanguageProvider: FC = ({ children }) => {
-	const languageState = useState<Languages>(ELanguage.EN);
+	const languageState = useState<Languages>(ELanguage.SK);
 	return (
 		<LanguageContext.Provider value={languageState}>
 			{children}
