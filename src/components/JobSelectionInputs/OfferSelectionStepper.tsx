@@ -13,6 +13,7 @@ import { StepsNames } from 'enums/EOfferSelectionSteps';
 import StepSwitch from 'components/JobSelectionInputs/StepSwitch';
 import { emptyParams, ISearchParams } from 'interfaces/ISearchParams';
 import { EPaths } from 'enums/EPaths';
+import { useTranslation } from 'hooks/useTranslation';
 
 const steps = StepsNames;
 
@@ -20,6 +21,7 @@ const OfferSelectionStepper = () => {
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [params, setParams] = useState<ISearchParams>(emptyParams);
 	const navigate = useNavigate();
+	const t = useTranslation();
 
 	const handleNext = () => {
 		setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -70,11 +72,11 @@ const OfferSelectionStepper = () => {
 							onClick={handleBack}
 							sx={{ mr: 1 }}
 						>
-							Back
+							{t('back')}
 						</Button>
 						<Box sx={{ flex: '1 1 auto' }} />
 						<Button onClick={handleNext}>
-							{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+							{activeStep === steps.length - 1 ? t('finish') : t('next')}
 						</Button>
 					</Box>
 				</>
