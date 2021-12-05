@@ -1,5 +1,4 @@
 import { Button } from '@mui/material';
-import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 
 type Props = {

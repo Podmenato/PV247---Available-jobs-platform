@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Step, StepButton, Stepper } from '@mui/material';
-import { onSnapshot } from '@firebase/firestore';
+import { Alert, Box, Button, Step, StepButton, Stepper } from '@mui/material';
+import { getDoc } from '@firebase/firestore';
 
 import { StepsNames } from 'enums/EOfferSelectionSteps';
 import StepSwitch from 'components/JobSelectionInputs/StepSwitch';
 import { filledParams, ISearchParams } from 'interfaces/ISearchParams';
 import { useTranslation } from 'hooks/useTranslation';
-import { myFilterCollection, setFilter } from 'utils/firebase';
+import { myFilterDocument, setFilter } from 'utils/firebase';
 import useUser from 'hooks/useUser';
 
 const steps = StepsNames;
@@ -16,6 +16,8 @@ const OfferSelectionStepper = () => {
 	const [params, setParams] = useState<ISearchParams>(filledParams);
 	const user = useUser();
 	const t = useTranslation();
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [isError, setIsError] = useState(false);
 
 	const handleStep = (step: number) => () => {
 		setActiveStep(step);
@@ -35,60 +37,71 @@ const OfferSelectionStepper = () => {
 		}
 
 		try {
-			await setFilter(params);
+			await setFilter(user.uid, params);
+			setIsSuccess(true);
 		} catch (err) {
-			console.log(err);
+			setIsError(true);
 		}
 	};
 
-	useEffect(
-		() =>
-			onSnapshot(myFilterCollection, snapshot => {
-				const fetched: ISearchParams | undefined = snapshot.docs[0].data();
-				if (fetched) {
-					setParams(fetched);
+	useEffect(() => {
+		const fetchFilter = async () => {
+			if (user) {
+				const fetched = await getDoc(myFilterDocument(user.uid));
+				if (fetched.exists()) {
+					setParams(fetched.data());
 				}
-			}),
-		[user]
-	);
+			}
+		};
+
+		fetchFilter();
+	}, [user]);
 
 	return (
-		<Box sx={{ width: '100%', height: '600px', padding: 1 }}>
-			<Stepper nonLinear activeStep={activeStep}>
-				{steps.map((label, index) => {
-					const stepProps: { completed?: boolean } = {};
-					return (
-						<Step key={label} {...stepProps}>
-							<StepButton color="inherit" onClick={handleStep(index)}>
-								{label}
-							</StepButton>
-						</Step>
-					);
-				})}
-			</Stepper>
-			<Box sx={{ width: '100%', height: '200px' }}>
-				<StepSwitch step={activeStep} params={params} setParams={setParams} />
-				<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-					<Button
-						color="inherit"
-						disabled={activeStep === 0}
-						onClick={handleBack}
-						sx={{ mr: 1 }}
-					>
-						{t('back')}
-					</Button>
-					<Box sx={{ flex: '1 1 auto' }} />
-					<Button
-						disabled={activeStep === steps.length - 1}
-						onClick={handleNext}
-					>
-						{t('next')}
+		<Box>
+			<Box sx={{ width: '100%', height: '600px', padding: 3 }}>
+				<Stepper
+					nonLinear
+					activeStep={activeStep}
+					sx={{ marginBottom: '20px' }}
+				>
+					{steps.map((label, index) => {
+						const stepProps: { completed?: boolean } = {};
+						return (
+							<Step key={label} {...stepProps}>
+								<StepButton color="inherit" onClick={handleStep(index)}>
+									{label}
+								</StepButton>
+							</Step>
+						);
+					})}
+				</Stepper>
+				<Box sx={{ width: '100%', height: '200px' }}>
+					<StepSwitch step={activeStep} params={params} setParams={setParams} />
+					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+						<Button
+							color="inherit"
+							disabled={activeStep === 0}
+							onClick={handleBack}
+							sx={{ mr: 1 }}
+						>
+							{t('back')}
+						</Button>
+						<Box sx={{ flex: '1 1 auto' }} />
+						<Button
+							disabled={activeStep === steps.length - 1}
+							onClick={handleNext}
+						>
+							{t('next')}
+						</Button>
+					</Box>
+					<Button variant="contained" onClick={handleSave}>
+						{t('save')}
 					</Button>
 				</Box>
-				<Button variant="contained" onClick={handleSave}>
-					{t('save')}
-				</Button>
 			</Box>
+			{isSuccess && <Alert severity="success">{t('filter_success')}</Alert>}
+			{isError && <Alert severity="error">{t('filter_error')}</Alert>}
 		</Box>
 	);
 };

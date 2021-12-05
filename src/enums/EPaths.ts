@@ -5,6 +5,5 @@ export enum EPaths {
 	TRENDING = '/trending',
 	OFFER = '/offer/:id',
 	LOGIN = '/login',
-	PERSONALIZED = '/personalized',
-	LIST = '/list'
+	PERSONALIZED = '/personalized'
 }

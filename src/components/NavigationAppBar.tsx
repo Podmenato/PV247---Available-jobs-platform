@@ -1,6 +1,5 @@
 import React from 'react';
-import { AppBar, Button, Container, styled, Toolbar } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { AppBar, Toolbar } from '@mui/material';
 
 import { EPaths } from 'enums/EPaths';
 import { signOut } from 'utils/firebase';
@@ -19,7 +18,6 @@ const NavigationAppBar = () => {
 			<Toolbar disableGutters sx={{ gap: 2 }}>
 				<LanguageSwitch />
 				<NavigationButton path={EPaths.HOME} text={t('home')} />
-				<NavigationButton path={EPaths.LIST} text={t('offers')} />
 				<NavigationButton path={EPaths.TRENDING} text={t('trending')} />
 				{user && (
 					<NavigationButton

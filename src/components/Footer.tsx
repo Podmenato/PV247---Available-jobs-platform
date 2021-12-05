@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Link } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 const Footer = () => (
 	<footer>

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Button } from '@mui/material';
 import Flags from 'country-flag-icons/react/3x2';
 
-import { ELanguage } from 'enums/ELanguage';
 import { useLanguage } from 'hooks/useTranslation';
 
 const LanguageSwitch = () => {
