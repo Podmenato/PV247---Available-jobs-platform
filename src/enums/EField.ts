@@ -7,3 +7,5 @@ export enum EField {
 	TRAFFIC = 'Doprava',
 	MONEY = 'Obchod a cestovní ruch'
 }
+
+export const ALL_FIELDS = Object.values(EField);

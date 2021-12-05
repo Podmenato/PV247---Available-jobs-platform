@@ -32,5 +32,6 @@ export default {
 	trending: 'Trending',
 	no_title: 'Bez názvu',
 	no_description: 'Bez popisu',
-	apply_filter: 'Aplikovať filter'
+	apply_filter: 'Aplikovať filter',
+	offers: 'Ponuky'
 };

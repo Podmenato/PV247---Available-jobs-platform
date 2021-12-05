@@ -32,5 +32,6 @@ export default {
 	trending: 'Trending',
 	no_title: 'No job title',
 	no_description: 'No description',
-	apply_filter: 'Apply filter'
+	apply_filter: 'Apply filter',
+	offers: 'Offers'
 };
