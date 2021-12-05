@@ -6,6 +6,7 @@ import {
 	ALL_RELATIONSHIP_TYPES,
 	EWorkRelationshipType
 } from 'enums/EWorkRelationshipType';
+import { isWorkRelationshipChecked } from 'utils/params';
 
 type TProps = {
 	params: ISearchParams;
@@ -49,23 +50,6 @@ const WorkRelationshipTypeSelection: FC<TProps> = ({ params, setParams }) => {
 		}
 	};
 
-	const isChecked = (label: EWorkRelationshipType) => {
-		switch (label) {
-			case EWorkRelationshipType.SP:
-				return params.relationship.SP;
-			case EWorkRelationshipType.PART:
-				return params.relationship.PART;
-			case EWorkRelationshipType.DPP:
-				return params.relationship.DPP;
-			case EWorkRelationshipType.FULL:
-				return params.relationship.FULL;
-			case EWorkRelationshipType.DPC:
-				return params.relationship.DPC;
-			default: {
-				return false;
-			}
-		}
-	};
 	return (
 		<FormGroup>
 			{ALL_RELATIONSHIP_TYPES.map(label => (
@@ -73,7 +57,7 @@ const WorkRelationshipTypeSelection: FC<TProps> = ({ params, setParams }) => {
 					key={label}
 					control={
 						<Checkbox
-							checked={isChecked(label)}
+							checked={isWorkRelationshipChecked(params, label)}
 							onChange={event => handleChange(event, label)}
 						/>
 					}

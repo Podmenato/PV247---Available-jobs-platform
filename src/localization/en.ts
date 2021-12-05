@@ -45,7 +45,8 @@ export default {
 	Language: 'Language',
 	Shift: 'Shift',
 	Worker_Type: 'Worker Type',
-	Work_Relationship: 'Relationship',
+	Work_Relationship: 'Work Relationship',
 	Salary: 'Salary',
+	hello: 'Hello',
 	save: 'Save'
 };

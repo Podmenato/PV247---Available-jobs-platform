@@ -3,6 +3,7 @@ import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 
 import { ISearchParams } from 'interfaces/ISearchParams';
 import { ALL_EDUCATION, EEducation } from 'enums/EEducation';
+import { isEducationChecked } from 'utils/params';
 
 type TProps = {
 	params: ISearchParams;
@@ -47,40 +48,18 @@ const EducationSelection: FC<TProps> = ({ params, setParams }) => {
 		}
 	};
 
-	const isChecked = (label: EEducation) => {
-		switch (label) {
-			case EEducation.A: {
-				return params.education.A;
-			}
-			case EEducation.C: {
-				return params.education.C;
-			}
-			case EEducation.H: {
-				return params.education.H;
-			}
-			case EEducation.K: {
-				return params.education.K;
-			}
-			case EEducation.T: {
-				return params.education.T;
-			}
-			default: {
-				return false;
-			}
-		}
-	};
 	return (
 		<FormGroup>
-			{ALL_EDUCATION.map(label => (
+			{ALL_EDUCATION.map(education => (
 				<FormControlLabel
-					key={label}
+					key={education}
 					control={
 						<Checkbox
-							checked={isChecked(label)}
-							onChange={event => handleChange(event, label)}
+							checked={isEducationChecked(params, education)}
+							onChange={event => handleChange(event, education)}
 						/>
 					}
-					label={label}
+					label={education}
 				/>
 			))}
 		</FormGroup>

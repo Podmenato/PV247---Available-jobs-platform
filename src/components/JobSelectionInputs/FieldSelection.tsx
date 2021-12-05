@@ -3,6 +3,7 @@ import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 
 import { ISearchParams } from 'interfaces/ISearchParams';
 import { ALL_FIELDS, EField } from 'enums/EField';
+import { isFieldChecked } from 'utils/params';
 
 type TProps = {
 	params: ISearchParams;
@@ -56,27 +57,6 @@ const FieldSelection: FC<TProps> = ({ params, setParams }) => {
 		}
 	};
 
-	const isChecked = (label: EField) => {
-		switch (label) {
-			case EField.TRAFFIC:
-				return params.field.TRAFFIC;
-			case EField.SERVICES:
-				return params.field.SERVICES;
-			case EField.MONEY:
-				return params.field.MONEY;
-			case EField.IT:
-				return params.field.IT;
-			case EField.HEALTHCARE:
-				return params.field.HEALTHCARE;
-			case EField.FACTORY:
-				return params.field.FACTORY;
-			case EField.DEFENCE:
-				return params.field.DEFENCE;
-			default: {
-				return false;
-			}
-		}
-	};
 	return (
 		<FormGroup>
 			{ALL_FIELDS.map(label => (
@@ -84,7 +64,7 @@ const FieldSelection: FC<TProps> = ({ params, setParams }) => {
 					key={label}
 					control={
 						<Checkbox
-							checked={isChecked(label)}
+							checked={isFieldChecked(params, label)}
 							onChange={event => handleChange(event, label)}
 						/>
 					}

@@ -1,7 +1,7 @@
 export enum EWorkLanguage {
-	ENG = '1',
-	RUS = '3',
-	SPA = '4'
+	ENG = 'Anglický jazyk',
+	RUS = 'Ruský jazyk',
+	SPA = 'Španielsky jazyk'
 }
 
 export const ALL_LANGUAGES = Object.values(EWorkLanguage);
