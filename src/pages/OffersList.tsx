@@ -9,6 +9,7 @@ import {
 	GridRow,
 	GridRowModel,
 	GridRowParams,
+	GridToolbar,
 	MuiEvent,
 	useGridApiEventHandler,
 	useGridApiRef
@@ -76,6 +77,9 @@ const OffersList = () => {
 				pageSize={5}
 				rowsPerPageOptions={[5]}
 				onRowClick={params => onRowClick(params)}
+				components={{
+					Toolbar: GridToolbar
+				}}
 			/>
 		</div>
 	);
