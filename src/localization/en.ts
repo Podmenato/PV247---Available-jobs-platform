@@ -37,7 +37,6 @@ export default {
 	profile_updated_error: 'Error occured while profile information update.',
 	personalized: 'My filter',
 	offers: 'Offers',
-	apply_filter: 'Apply filter',
 	finish: 'Finish',
 	next: 'Next',
 	back: 'Back',
