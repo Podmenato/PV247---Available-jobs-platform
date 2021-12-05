@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Step, StepButton, Stepper } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { onSnapshot } from '@firebase/firestore';
 
 import { StepsNames } from 'enums/EOfferSelectionSteps';
 import StepSwitch from 'components/JobSelectionInputs/StepSwitch';
-import { emptyParams, ISearchParams } from 'interfaces/ISearchParams';
-import { EPaths } from 'enums/EPaths';
+import { filledParams, ISearchParams } from 'interfaces/ISearchParams';
 import { useTranslation } from 'hooks/useTranslation';
+import { myFilterCollection, setFilter } from 'utils/firebase';
+import useUser from 'hooks/useUser';
 
 const steps = StepsNames;
 
 const OfferSelectionStepper = () => {
 	const [activeStep, setActiveStep] = React.useState(0);
-	const [params, setParams] = useState<ISearchParams>(emptyParams);
-	const navigate = useNavigate();
+	const [params, setParams] = useState<ISearchParams>(filledParams);
+	const user = useUser();
 	const t = useTranslation();
 
 	const handleStep = (step: number) => () => {
@@ -28,9 +29,28 @@ const OfferSelectionStepper = () => {
 		setActiveStep(prevActiveStep => prevActiveStep - 1);
 	};
 
-	const handleSave = () => {
-		navigate(EPaths.LIST, { state: { params } });
+	const handleSave = async () => {
+		if (!user?.email) {
+			return;
+		}
+
+		try {
+			await setFilter(params);
+		} catch (err) {
+			console.log(err);
+		}
 	};
+
+	useEffect(
+		() =>
+			onSnapshot(myFilterCollection, snapshot => {
+				const fetched: ISearchParams | undefined = snapshot.docs[0].data();
+				if (fetched) {
+					setParams(fetched);
+				}
+			}),
+		[user]
+	);
 
 	return (
 		<Box sx={{ width: '100%', height: '600px', padding: 1 }}>
@@ -65,7 +85,9 @@ const OfferSelectionStepper = () => {
 						{t('next')}
 					</Button>
 				</Box>
-				<Button onClick={handleSave}>{t('save')}</Button>
+				<Button variant="contained" onClick={handleSave}>
+					{t('save')}
+				</Button>
 			</Box>
 		</Box>
 	);
