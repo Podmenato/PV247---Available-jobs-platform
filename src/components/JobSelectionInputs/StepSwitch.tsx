@@ -9,7 +9,6 @@ import ShiftsSelection from 'components/JobSelectionInputs/ShiftsSelection';
 import WorkLanguageSelection from 'components/JobSelectionInputs/WorkLanguageSelection';
 import WorkRelationshipTypeSelection from 'components/JobSelectionInputs/WorkRelationshipTypeSelection';
 import WorkerTypeSelection from 'components/JobSelectionInputs/WorkerTypeSelection';
-import SalaryInput from 'components/JobSelectionInputs/SalaryInput';
 
 type TProps = {
 	step: EOfferSelectionSteps;
@@ -27,9 +26,6 @@ const StepSwitch: FC<TProps> = ({ step, params, setParams }) => (
 		)}
 		{step === EOfferSelectionSteps.LANGUAGE && (
 			<WorkLanguageSelection params={params} setParams={setParams} />
-		)}
-		{step === EOfferSelectionSteps.SALARY && (
-			<SalaryInput params={params} setParams={setParams} />
 		)}
 		{step === EOfferSelectionSteps.SHIFT && (
 			<ShiftsSelection params={params} setParams={setParams} />

@@ -70,7 +70,7 @@ const OfferSelectionStepper = () => {
 						return (
 							<Step key={label} {...stepProps}>
 								<StepButton color="inherit" onClick={handleStep(index)}>
-									{label}
+									{t(label)}
 								</StepButton>
 							</Step>
 						);
