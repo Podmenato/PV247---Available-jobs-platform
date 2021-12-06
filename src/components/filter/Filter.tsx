@@ -20,7 +20,7 @@ const Filter: React.FC<TProps> = ({ params, setParams }) => (
 		<Box sx={{ marginBottom: '20px' }}>
 			<ActiveParams params={params} />
 		</Box>
-		<Box sx={{ display: 'flex' }}>
+		<Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
 			<EducationFilter params={params} setParams={setParams} />
 			<WorkerTypeFilter params={params} setParams={setParams} />
 			<FieldFilter params={params} setParams={setParams} />
