@@ -23,7 +23,7 @@ const WorkLanguageFilter: React.FC<TProps> = ({ params, setParams }) => {
 	};
 
 	return (
-		<Box sx={{ marginRight: '10px' }}>
+		<Box sx={{ margin: '0 10px 10px 0' }}>
 			<Button variant="contained" onClick={handleClick}>
 				{t('Language')}
 			</Button>
